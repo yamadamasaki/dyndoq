@@ -30,3 +30,4 @@ twbs:bootstrap
 accounts-ui
 accounts-password
 dburles:factory
+mdg:validated-method
