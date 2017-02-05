@@ -1,3 +1,81 @@
 <template name="customers">
 <h1>顧客についての基本情報</h1>
+
+<blockquote>
+    <p>このドキュメントは, 当グループが担当する顧客についての経理情報, 営業情報をまとめたものです.</p>
+</blockquote>
+
+<hr>
+
+{{#each year in yearIndex}}
+
+<h2>{{year}} 年度の顧客についての基本情報</h2>
+
+<h3>全顧客サマリ</h3>
+    
+<table>
+<thead>
+    <tr>
+    <th>
+        <p>顧客名</p>
+    </th>
+    <th>
+        <p>売上</p>
+    </th>
+    <th>
+        <p>粗利率 (%)</p>
+    </th>
+    <th>
+        <p>粗利額</p>
+    </th>
+    <th>
+        <p>営業変動費率 (%)</p>
+    </th>
+    <th>
+        <p>営業変動費</p>
+    </th>
+    <th>
+        <p>限界利益</p>
+    </th>
+    <th>
+        <p>過去3年平均成長率</p>
+    </th>
+   </tr>
+</thead>
+<tbody>
+    {{#each customer in (customers year)}}
+    <tr>
+    <td>
+        <p>{{customer.name}}</p>
+    </td>
+    <td>
+        <p>{{customer.sales}}</p>
+    </td>
+    <td>
+        <p>{{customerGrossMarginRate customer}}</p>
+    </td>
+    <td>
+        <p>{{customer.grossMargin}}</p>
+    </td>
+    <td>
+        <p>{{customerSalesVariableCost customer}} </p>
+    </td>
+    <td>
+        <p>{{customer.salesVariableCost}}</p>
+    </td>
+    <td>
+        <p>{{customer.marginalProfit}}</p>
+    </td>
+    <td>
+        <p>{{customer.growingRatio}}</p>
+    </td>
+    <td>
+        <p>{{customer.growingExpectation}}</p>
+    </td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>
+
+{{/each}}
 </template>
