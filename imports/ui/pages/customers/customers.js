@@ -5,6 +5,7 @@ import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 
 import './customers.html';
+import './add-customer.js';
 
 Template.customers.onCreated(() => {
     Tracker.autorun(() => {
