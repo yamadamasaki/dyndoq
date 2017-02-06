@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
-import { Meteor } from 'meteor/meteor';
+import { insertCustomer } from '/imports/api/customers/methods.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import './add-customer.html';
 
@@ -8,17 +9,18 @@ Template.customers.events({
         event.preventDefault();
 
         const target = event.target;
-        const year = target.year;
-        const customer = target.customer;
+        const [year, name] = [target.year.value, target.name.value];
 
-        console.log('submit .customer-add-year:', year.value, customer.value);
-
-        Meteor.call('customers.insert', year.value, customer.value, (error) => {
-            if (error) {
-                alert(error.error);
+        insertCustomer.call({ year, name }, (err, res) => {
+            if (err) {
+                console.log('insertCustomer.call', err);
+                FlowRouter.go('App.home');
             } else {
-                year.value = '';
-                customer.value = '';
+                target.year.value = target.name.value = '';
+                FlowRouter.go('customers', {}, {
+                    group: FlowRouter.getQueryParam('group'),
+                    year: FlowRouter.getQueryParam('year')
+                });
             }
         });
     },
