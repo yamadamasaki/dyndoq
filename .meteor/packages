@@ -27,8 +27,9 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 aldeed:simple-schema
 aldeed:collection2
 twbs:bootstrap
-accounts-ui
-accounts-password
 dburles:factory
 mdg:validated-method
 alanning:roles
+stylus
+accounts-password
+ian:accounts-ui-bootstrap-3
