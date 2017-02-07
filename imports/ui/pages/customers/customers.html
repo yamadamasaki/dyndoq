@@ -1,10 +1,17 @@
 <template name="customers">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
 <h1>顧客についての基本情報</h1>
-
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
 <blockquote>
     <p>このドキュメントは, 当グループが担当する顧客についての経理情報, 営業情報をまとめたものです.</p>
 </blockquote>
-
+</div>
+</div>
 <hr>
 
 {{> addCustomer}}
@@ -13,11 +20,19 @@
 
 {{#each year in yearIndex}}
 
+<div class="row">
+<div class="col-md-12">
 <h2>{{year}} 年度の顧客についての基本情報</h2>
+</div>
+</div>
 
+<div class="row">
+<div class="col-md-12">
 <h3>全顧客サマリ</h3>
+</div>
+</div>
     
-<table>
+<table class="table-hover">
 <thead>
     <tr>
     <th>
@@ -82,4 +97,5 @@
 </table>
 
 {{/each}}
+</div>
 </template>
