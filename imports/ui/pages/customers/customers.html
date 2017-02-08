@@ -78,7 +78,11 @@
         <p>{{customerGrossMarginRate customer}}</p>
     </td>
     <td>
-        <p>{{customer.grossMargin}}</p>
+        <form class="grossMargin">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="粗利額" class="form-control" id="{{customer._id}}" value={{customer.grossMargin}}>        
+            </div>
+        </form>
     </td>
     <td>
         <p>{{customerSalesVariableCost customer}} </p>

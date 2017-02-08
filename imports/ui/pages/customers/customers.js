@@ -30,7 +30,7 @@ Template.customers.helpers({
 });
 
 Template.customers.events({
-    'change .sales' (event) {
+    'change' (event) {
         event.preventDefault();
 
         const target = event.target;
@@ -38,7 +38,7 @@ Template.customers.events({
 
         updateCustomer.call({
             customerId,
-            field: 'sales',
+            field: target.form.className,
             value: parseInt(target.value)
         }), (error) => {
             if (error) {
