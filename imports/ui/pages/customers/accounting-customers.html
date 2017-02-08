@@ -1,0 +1,83 @@
+<template name="accountingCustomers">
+<table class="table-hover table-bordered">
+<thead>
+    <tr>
+    <th>
+        <p>顧客名</p>
+    </th>
+    <th>
+        <p>売上</p>
+    </th>
+    <th>
+        <p>粗利率 (%)</p>
+    </th>
+    <th>
+        <p>粗利額</p>
+    </th>
+    <th>
+        <p>営業変動費率 (%)</p>
+    </th>
+    <th>
+        <p>営業変動費</p>
+    </th>
+    <th>
+        <p>限界利益</p>
+    </th>
+    <th>
+        <p>過去3年平均成長率</p>
+    </th>
+   </tr>
+</thead>
+<tbody>
+    {{#each customer in customers}}
+    <tr>
+    <td>
+        <p>{{customer.name}}</p>
+    </td>
+    <td>
+        <form class="sales">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="売上" class="form-control" id="{{customer._id}}" value={{customer.sales}}>        
+            </div>
+        </form>
+    </td>
+    <td>
+        <p>{{customerGrossMarginRate customer}}</p>
+    </td>
+    <td>
+        <form class="grossMargin">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="粗利額" class="form-control" id="{{customer._id}}" value={{customer.grossMargin}}>        
+            </div>
+        </form>
+    </td>
+    <td>
+        <p>{{customerSalesVariableCost customer}} </p>
+    </td>
+    <td>
+        <form class="salesVariableCost">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="営業変動費" class="form-control" id="{{customer._id}}" value={{customer.salesVariableCost}}>        
+            </div>
+        </form>
+    </td>
+    <td>
+        <form class="marginalProfit">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="限界利益" class="form-control" id="{{customer._id}}" value={{customer.marginalProfit}}>        
+            </div>
+        </form>
+    </td>
+    <td>
+        <form class="growingRatio">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="成長率" class="form-control" id="{{customer._id}}" value={{customer.growingRatio}}>        
+            </div>
+        </form>
+    </td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>
+
+</template>

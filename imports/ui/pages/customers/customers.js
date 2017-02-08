@@ -7,6 +7,7 @@ import { updateCustomer } from '/imports/api/customers/methods.js';
 
 import './customers.html';
 import './add-customer.js';
+import './accounting-customers.js';
 
 Template.customers.onCreated(() => {
     Tracker.autorun(() => {
@@ -27,6 +28,10 @@ Template.customers.helpers({
         check(year, Match.Integer);
         return Customers.find({ financialYear: year });
     },
+    customersArg: year => {
+        check(year, Match.Integer);
+        return { customers: Customers.find({ financialYear: year }) };
+    }
 });
 
 Template.customers.events({
