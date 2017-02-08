@@ -4,6 +4,10 @@ import { Mongo } from 'meteor/mongo';
 export const Customers = new Mongo.Collection('customers');
 
 const CustomerSchema = new SimpleSchema({
+    _id: {
+        type: String,
+        optional: true,
+    },
     _tenant: {
         type: String,
     },

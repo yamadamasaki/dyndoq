@@ -27,9 +27,9 @@ Template.addCustomer.events({
             return;
         }
 
-        insertCustomer.call({ group, year, name }, (err, res) => {
-            if (err) {
-                console.log('insertCustomer.call', err);
+        insertCustomer.call({ group, year, name }, (error) => {
+            if (error) {
+                console.log('insertCustomer.call', error);
                 FlowRouter.go('App.home');
             } else {
                 target.year.value = target.name.value = '';

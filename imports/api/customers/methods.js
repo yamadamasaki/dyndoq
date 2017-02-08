@@ -22,3 +22,19 @@ export const insertCustomer = new ValidatedMethod({
         });
     },
 });
+
+export const updateCustomer = new ValidatedMethod({
+    name: 'customer.update',
+    validate: new SimpleSchema({
+        customerId: { type: String },
+        field: { type: String },
+        value: { type: Number },
+    }).validator(),
+    run: ({ customerId, field, value }) => {
+        Customers.update({ _id: customerId }, {
+            $set: {
+                [field]: value,
+            }
+        });
+    },
+});

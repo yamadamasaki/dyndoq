@@ -3,6 +3,7 @@ import { Customers } from '/imports/api/customers/customers.js';
 import { check, Match } from 'meteor/check';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { updateCustomer } from '/imports/api/customers/methods.js';
 
 import './customers.html';
 import './add-customer.js';
@@ -33,15 +34,16 @@ Template.customers.events({
         event.preventDefault();
 
         const target = event.target;
-        const sales = target.value;
-        const customer = target.id;
+        const customerId = target.id;
 
-        console.log("oninput .sales: ", event);
-
-        /*
-        updateCustomer.call({ customer, sales }), (error, result) => {
-            
+        updateCustomer.call({
+            customerId,
+            field: 'sales',
+            value: parseInt(target.value)
+        }), (error) => {
+            if (error) {
+                console.log('updateCustomer.call', error);
+            }
         }
-        */
     }
 });
