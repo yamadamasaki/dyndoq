@@ -113,6 +113,39 @@
 </tbody>
 </table>
 
+{{#each customer in (customers year)}}
+
+<div class="row">
+<div class="col-md-12">
+<h3>{{customer.name}} 詳細</h3>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<h4>経理情報</h4>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<ul>
+    <li>
+        売上
+    </li>
+</ul>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<h4>営業情報</h4>
+</div>
+</div>
+    
 {{/each}}
+
+{{/each}}
+
 </div>
 </template>
