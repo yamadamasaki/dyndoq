@@ -43,7 +43,7 @@ const CustomerSchema = new SimpleSchema({
         type: SimpleSchema.Integer,
         optional: true,
     },
-    saleCVariableVost: { // 営業変動費
+    salesVariableCost: { // 営業変動費
         type: SimpleSchema.Integer,
         optional: true,
     },

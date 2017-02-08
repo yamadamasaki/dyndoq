@@ -88,16 +88,25 @@
         <p>{{customerSalesVariableCost customer}} </p>
     </td>
     <td>
-        <p>{{customer.salesVariableCost}}</p>
+        <form class="salesVariableCost">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="営業変動費" class="form-control" id="{{customer._id}}" value={{customer.salesVariableCost}}>        
+            </div>
+        </form>
     </td>
     <td>
-        <p>{{customer.marginalProfit}}</p>
+        <form class="marginalProfit">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="限界利益" class="form-control" id="{{customer._id}}" value={{customer.marginalProfit}}>        
+            </div>
+        </form>
     </td>
     <td>
-        <p>{{customer.growingRatio}}</p>
-    </td>
-    <td>
-        <p>{{customer.growingExpectation}}</p>
+        <form class="growingRatio">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="成長率" class="form-control" id="{{customer._id}}" value={{customer.growingRatio}}>        
+            </div>
+        </form>
     </td>
     </tr>
     {{/each}}
