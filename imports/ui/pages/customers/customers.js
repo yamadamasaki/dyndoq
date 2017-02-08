@@ -27,3 +27,21 @@ Template.customers.helpers({
         return Customers.find({ financialYear: year });
     },
 });
+
+Template.customers.events({
+    'change .sales' (event) {
+        event.preventDefault();
+
+        const target = event.target;
+        const sales = target.value;
+        const customer = target.id;
+
+        console.log("oninput .sales: ", event);
+
+        /*
+        updateCustomer.call({ customer, sales }), (error, result) => {
+            
+        }
+        */
+    }
+});

@@ -32,7 +32,7 @@
 </div>
 </div>
     
-<table class="table-hover">
+<table class="table-hover table-bordered">
 <thead>
     <tr>
     <th>
@@ -68,7 +68,11 @@
         <p>{{customer.name}}</p>
     </td>
     <td>
-        <p>{{customer.sales}}</p>
+        <form class="sales">
+            <div class="form-group">
+                <input type="text" name="value" placeholder="売上" class="form-control" id="{{customer._id}}" value={{customer.sales}}>        
+            </div>
+        </form>
     </td>
     <td>
         <p>{{customerGrossMarginRate customer}}</p>
