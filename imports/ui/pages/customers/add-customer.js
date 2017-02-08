@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 
 import './add-customer.html';
 
-Template.customers.onCreated(function() {
+Template.addCustomer.onCreated(function() {
     Meteor.subscribe('user.roles');
 });
 
@@ -15,7 +15,7 @@ const ingroup = (group) => {
     return (roles && roles[group]) ? group : null;
 };
 
-Template.customers.events({
+Template.addCustomer.events({
     'submit .add-customer' (event) {
         event.preventDefault();
 
