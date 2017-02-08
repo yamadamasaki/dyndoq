@@ -31,7 +31,8 @@ Template.customers.helpers({
     customersArg: year => {
         check(year, Match.Integer);
         return { customers: Customers.find({ financialYear: year }) };
-    }
+    },
+    singleCustomerArg: customer => { return { customers: [customer] } },
 });
 
 Template.customers.events({
