@@ -1,66 +1,76 @@
 <template name="customers">
-<div class="container-fluid">
-<div class="row">
-<div class="col-md-12">
-<h1>顧客についての基本情報</h1>
-</div>
-</div>
-<div class="row">
-<div class="col-md-12">
-<blockquote>
-    <p>このドキュメントは, 当グループが担当する顧客についての経理情報, 営業情報をまとめたものです.</p>
-</blockquote>
-</div>
-</div>
-<hr>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>顧客についての基本情報</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <blockquote>
+                    <p>このドキュメントは, 当グループが担当する顧客についての経理情報, 営業情報をまとめたものです.</p>
+                </blockquote>
+            </div>
+        </div>
 
-{{> addCustomer}}
+        <hr>
 
-<hr>
+        {{> addCustomer}}
 
-{{#each year in yearIndex}}
+        <hr>
 
-<div class="row">
-<div class="col-md-12">
-<h2>{{year}} 年度の顧客についての基本情報</h2>
-</div>
-</div>
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each year in yearIndex}}
+                <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
+                {{/each}}
+            </ul>   
+            <div class="tab-content">
+                {{#each year in yearIndex}}
+                <div role="tabpanel" class="tab-pane" id="{{year}}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>{{year}} 年度の顧客についての基本情報</h2>
+                        </div>
+                    </div>
 
-<div class="row">
-<div class="col-md-12">
-<h3>全顧客サマリ</h3>
-</div>
-</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>全顧客サマリ</h3>
+                        </div>
+                    </div>
 
-{{> accountingCustomers (customersArg year)}}
+                    {{> accountingCustomers (customersArg year)}}
 
-{{#each customer in (customers year)}}
+                    {{#each customer in (customers year)}}
 
-<div class="row">
-<div class="col-md-12">
-<h3>{{customer.name}} 詳細</h3>
-</div>
-</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>{{customer.name}} 詳細</h3>
+                        </div>
+                    </div>
 
-<div class="row">
-<div class="col-md-12">
-<h4>経理情報</h4>
-</div>
-</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>経理情報</h4>
+                        </div>
+                    </div>
 
-{{> accountingCustomers (singleCustomerArg customer)}}
+                    {{> accountingCustomers (singleCustomerArg customer)}}
 
-<div class="row">
-<div class="col-md-12">
-<h4>営業情報</h4>
-</div>
-</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>営業情報</h4>
+                        </div>
+                    </div>
 
-{{> salesCustomers (departmentsArg customer)}}
-    
-{{/each}}
+                    {{> salesCustomers (departmentsArg customer)}}
+                    
+                    {{/each}}
 
-{{/each}}
-
-</div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
 </template>
