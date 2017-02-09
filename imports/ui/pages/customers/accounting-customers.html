@@ -35,7 +35,7 @@
         <p>{{customer.name}}</p>
     </td>
     <td>
-        <form class="sales">
+        <form class="cell" id="sales">
             <div class="form-group">
                 <input type="text" name="value" placeholder="売上" class="form-control" id="{{customer._id}}" value={{customer.sales}}>        
             </div>
@@ -45,7 +45,7 @@
         <p>{{customerGrossMarginRate customer}}</p>
     </td>
     <td>
-        <form class="grossMargin">
+        <form class="cell" id="grossMargin">
             <div class="form-group">
                 <input type="text" name="value" placeholder="粗利額" class="form-control" id="{{customer._id}}" value={{customer.grossMargin}}>        
             </div>
@@ -55,21 +55,21 @@
         <p>{{customerSalesVariableCost customer}} </p>
     </td>
     <td>
-        <form class="salesVariableCost">
+        <form class="cell" id="salesVariableCost">
             <div class="form-group">
                 <input type="text" name="value" placeholder="営業変動費" class="form-control" id="{{customer._id}}" value={{customer.salesVariableCost}}>        
             </div>
         </form>
     </td>
     <td>
-        <form class="marginalProfit">
+        <form class="cell" id="marginalProfit">
             <div class="form-group">
                 <input type="text" name="value" placeholder="限界利益" class="form-control" id="{{customer._id}}" value={{customer.marginalProfit}}>        
             </div>
         </form>
     </td>
     <td>
-        <form class="growingRatio">
+        <form class="cell" id="growingRatio">
             <div class="form-group">
                 <input type="text" name="value" placeholder="成長率" class="form-control" id="{{customer._id}}" value={{customer.growingRatio}}>        
             </div>
