@@ -30,51 +30,47 @@
         {{#each department in departments}}
     <tr>
     <td>
-        <form class="cell" id="targetDepartment">
-            <div class="form-group">
-                <input type="text" name="value" placeholder="アプローチ部署名" class="form-control" id="{{department._id}}" value={{department.targetDepartment}}>        
-            </div>
-        </form>
+        {{department.name}}
     </td>
     <td>
         <form class="cell" id="keyPerson">
             <div class="form-group">
-                <input type="text" name="value" placeholder="キーマン名" class="form-control" id="{{department._id}}" value={{department.keyPerson}}>        
+                <input type="text" name="value" placeholder="キーマン名" class="form-control" id="{{department._id}}" value="{{department.keyPerson}}">        
             </div>
         </form>
     </td>
     <td>
          <form class="cell" id="keyPersonFamiliality">
             <div class="form-group">
-                <input type="text" name="value" placeholder="キーマン親密度" class="form-control" id="{{department._id}}" value={{department.keyPersonFamiliality}}>        
+                <input type="text" name="value" placeholder="キーマン親密度" class="form-control" id="{{department._id}}" value="{{department.keyPersonFamiliality}}">        
             </div>
         </form>
     </td>
     <td>
          <form class="cell" id="influencer">
             <div class="form-group">
-                <input type="text" name="value" placeholder="インフルエンサー" class="form-control" id="{{department._id}}" value={{department.influencer}}>        
+                <input type="text" name="value" placeholder="インフルエンサー" class="form-control" id="{{department._id}}" value="{{department.influencer}}">        
             </div>
         </form>
     </td>
     <td>
         <form class="cell" id="influencerFamiliality">
             <div class="form-group">
-                <input type="text" name="value" placeholder="インフル親密度" class="form-control" id="{{department._id}}" value={{department.influencerFamiliality}}>        
+                <input type="text" name="value" placeholder="インフル親密度" class="form-control" id="{{department._id}}" value="{{department.influencerFamiliality}}">        
             </div>
         </form>
     </td>
     <td>
          <form class="cell" id="contentionRatio">
             <div class="form-group">
-                <input type="text" name="value" placeholder="競合率" class="form-control" id="{{department._id}}" value={{department.contentionRatio}}>        
+                <input type="text" name="value" placeholder="競合率" class="form-control" id="{{department._id}}" value="{{department.contentionRatio}}">        
             </div>
         </form>
     </td>
      <td>
        <form class="cell" id="growingExpectation">
             <div class="form-group">
-                <input type="text" name="value" placeholder="拡販余地" class="form-control" id="{{department._id}}" value={{department.growingExpectation}}>        
+                <input type="text" name="value" placeholder="拡販余地" class="form-control" id="{{department._id}}" value="{{department.growingExpectation}}">        
             </div>
         </form>
     </td>
