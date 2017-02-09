@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Customers } from '/imports/api/customers/customers.js';
+import { Departments } from '/imports/api/customers/departments.js';
 import { check, Match } from 'meteor/check';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
@@ -8,6 +9,7 @@ import { updateCustomer } from '/imports/api/customers/methods.js';
 import './customers.html';
 import './add-customer.js';
 import './accounting-customers.js';
+import './sales-customers.js';
 
 Template.customers.onCreated(() => {
     Tracker.autorun(() => {
@@ -33,6 +35,10 @@ Template.customers.helpers({
         return { customers: Customers.find({ financialYear: year }) };
     },
     singleCustomerArg: customer => { return { customers: [customer] } },
+    departmentsArg: customer => {
+        check(customer, Object);
+        return { departments: Departments.find({ customer: customer._id }) };
+    },
 });
 
 Template.customers.events({
