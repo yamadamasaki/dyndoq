@@ -2,18 +2,13 @@ import { Template } from 'meteor/templating';
 import { insertDepartment } from '/imports/api/customers/methods.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';
+import { ingroup } from '/imports/api/accounts/utilities.js';
 
 import './add-department.html';
 
 Template.addDepartment.onCreated(function() {
     Meteor.subscribe('user.roles');
 });
-
-const ingroup = (group) => {
-    if (!group) return "default-group";
-    const roles = Meteor.users.findOne({ _id: Meteor.userId() }).roles;
-    return (roles && roles[group]) ? group : null;
-};
 
 Template.addDepartment.events({
     'submit .add-department' (event) {
