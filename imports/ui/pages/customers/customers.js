@@ -8,6 +8,7 @@ import { updateCustomer } from '/imports/api/customers/methods.js';
 
 import './customers.html';
 import './add-customer.js';
+import './add-department.js';
 import './accounting-customers.js';
 import './sales-customers.js';
 
@@ -39,6 +40,10 @@ Template.customers.helpers({
         check(customer, Object);
         return { departments: Departments.find({ customer: customer._id }) };
     },
+    customerArg: customer => {
+        check(customer, Object);
+        return { customer };
+    }
 });
 
 Template.customers.events({

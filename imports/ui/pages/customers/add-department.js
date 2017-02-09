@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
-import { insertCustomer } from '/imports/api/customers/methods.js';
+import { insertDepartment } from '/imports/api/customers/methods.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';
 
-import './add-customer.html';
+import './add-department.html';
 
-Template.addCustomer.onCreated(function() {
+Template.addDepartment.onCreated(function() {
     Meteor.subscribe('user.roles');
 });
 
@@ -15,23 +15,24 @@ const ingroup = (group) => {
     return (roles && roles[group]) ? group : null;
 };
 
-Template.addCustomer.events({
-    'submit .add-customer' (event) {
+Template.addDepartment.events({
+    'submit .add-department' (event) {
         event.preventDefault();
 
         const target = event.target;
-        const [year, name] = [target.year.value, target.name.value];
+        const name = target.name.value;
         const group = ingroup(FlowRouter.getQueryParam('group'));
         if (!group) {
             console.log("illeagal group: ", group);
             return;
         }
+        const customerId = target.customerId.value;
 
-        insertCustomer.call({ group, year, name }, (error) => {
+        insertDepartment.call({ group, customerId, name }, (error) => {
             if (error) {
-                console.log('insertCustomer.call', error);
+                console.log('insertDepartment.call', error);
             } else {
-                target.year.value = target.name.value = '';
+                target.name.value = '';
             }
         });
     },

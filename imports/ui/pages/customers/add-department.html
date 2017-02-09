@@ -1,0 +1,19 @@
+<template name="addDepartment">
+     <ul>
+        <li>顧客のアプローチ部署情報を新たに追加しますか?</li>
+        <ul>
+            <li>
+                <form class="add-department form-inline">
+                    <input type="hidden" name="customerId" value="{{customer._id}}">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="部署名" class="form-control" id="department">
+                        <label for="department">についての情報を</label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn btn-default">追加</button> する!
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </ul>
+</template>

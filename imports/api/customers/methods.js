@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Customers } from './customers.js';
+import { Departments } from './departments.js';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
@@ -35,6 +36,32 @@ export const updateCustomer = new ValidatedMethod({
             $set: {
                 [field]: value,
             }
+        });
+    },
+});
+
+export const insertDepartment = new ValidatedMethod({
+    name: 'deparments.insert',
+    validate: new SimpleSchema({
+        group: { type: String },
+        customerId: { type: String },
+        name: { type: String },
+    }).validator(),
+    run: ({ group, customerId, name }) => {
+        const customer = Customers.findOne({ _id: customerId }, { fields: { financialYear: 1 } });
+        if (!customer) {
+            console.log("insertDepartment: customer does not exists", customerId);
+            return;
+        }
+        return Departments.insert({
+            _tenant: Meteor.users.findOne({ _id: Meteor.userId() }, { fields: { 'tenant': 1 } }).tenant,
+            _service: 'sales-reinforcement',
+            _group: group,
+            _owner: Meteor.userId(),
+            _timestamp: new Date().getTime(),
+            financialYear: customer.financialYear,
+            customer: customerId,
+            name: name,
         });
     },
 });
