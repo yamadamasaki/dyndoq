@@ -19,7 +19,7 @@
 
         <hr>
 
-        <div>
+        <div> <!-- nav nav-tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 {{#each year in yearIndex}}
                 <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
@@ -42,41 +42,52 @@
 
                     {{> accountingCustomers (customersArg year)}}
 
-                    {{#each customer in (customers year)}}
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        
+                        {{#each customer in (customers year)}}
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>{{customer.name}} 詳細</h3>
-                        </div>
-                    </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h3 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{customer.name}}" aria-expanded="true" aria-controls="{{customer.name}}-collapse">
+                                        {{customer.name}} 詳細
+                                    </a>
+                                </h3>
+                            </div>
+                            <div id="{{customer.name}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{customer.name}}-heading">
+                                <div class="panel-body">
+                                    <hr>                    
 
-                    <hr>                    
+                                    {{> addDepartment (customerArg customer)}}
+                                    
+                                    <hr>
 
-                    {{> addDepartment (customerArg customer)}}
-                    
-                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>経理情報</h4>
+                                        </div>
+                                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>経理情報</h4>
-                        </div>
-                    </div>
+                                    {{> accountingCustomers (singleCustomerArg customer)}}
 
-                    {{> accountingCustomers (singleCustomerArg customer)}}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>営業情報</h4>
+                                        </div>
+                                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>営業情報</h4>
-                        </div>
-                    </div>
+                                    {{> salesCustomers (departmentsArg customer)}}
+                                </div> <!-- class="panel-body" -->
+                            </div> <!-- id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" -->
+                        </div> <!-- class="panel panel-default" -->
 
-                    {{> salesCustomers (departmentsArg customer)}}
-                    
-                    {{/each}}
+                        {{/each}} <!-- customer in (customer year) -->
+                                
+                    </div> <!-- class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" -->
 
-                </div>
-                {{/each}}
-            </div>
-        </div>
-    </div>
+                </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
+                {{/each}} <!-- year in yearIndex -->
+            </div> <!-- class="tab-content" -->
+        </div> <!-- nav nav-tabs -->
+    </div> <!-- class="container-fluid" -->
 </template>
