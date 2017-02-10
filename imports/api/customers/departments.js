@@ -34,34 +34,25 @@ const DepartmentSchema = new SimpleSchema({
     name: { // アプローチ部署名
         type: String,
     },
-    keyPersons: { // キーマン名
-        type: Array,
+    keyPersons: { // キーマン
+        type: [Object],
         optional: true,
     },
-    'keyPersons.$': {
+    'keyPersons.$.name': { // キーマン名
         type: String,
     },
-    keyPersonFamilialities: { // キーマン親密度
-        type: Array,
-        optional: true,
+    'keyPersons.$.familiality': { // キーマン親密度
+        type: String,
         //allowedValues: () => getFamilialityCategory(),
     },
-    'keyPersonFamilialities.$': {
-        type: String,
-    },
-    influencers: { // インフルエンサー名
-        type: Array,
+    influencers: { // インフルエンサー
+        type: [Object],
         optional: true,
     },
-    'influencers.$': {
+    'influencers.$.name': { // インフルエンサー名
         type: String,
     },
-    influencerFamilialities: { // インフル親密度
-        type: Array,
-        optional: true,
-        //allowedValues: () => getFamilialityCategory(),
-    },
-    'influencerFamilialities.$': {
+    'influencers.$.familiality': { // インフル親密度
         type: String,
     },
     contentionRatio: { // 競合率
