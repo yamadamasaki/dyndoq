@@ -50,6 +50,12 @@
                         </div>
                     </div>
 
+                    <hr>                    
+
+                    {{> addDepartment (customerArg customer)}}
+                    
+                    <hr>
+
                     <div class="row">
                         <div class="col-md-12">
                             <h4>経理情報</h4>
@@ -63,8 +69,6 @@
                             <h4>営業情報</h4>
                         </div>
                     </div>
-                    
-                    {{> addDepartment (customerArg customer)}}
 
                     {{> salesCustomers (departmentsArg customer)}}
                     
