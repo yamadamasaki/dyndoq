@@ -65,7 +65,7 @@ const DepartmentSchema = new SimpleSchema({
         type: String,
     },
     contentionRatio: { // 競合率
-        type: String,
+        type: Number,
         optional: true,
         //allowedValues: () => getContentionRateCategory(),
     },

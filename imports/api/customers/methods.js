@@ -3,6 +3,7 @@ import { Customers } from './customers.js';
 import { Departments } from './departments.js';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { check, Match } from 'meteor/check';
 
 export const insertCustomer = new ValidatedMethod({
     name: 'cutomers.insert',
@@ -62,6 +63,25 @@ export const insertDepartment = new ValidatedMethod({
             financialYear: customer.financialYear,
             customer: customerId,
             name: name,
+        });
+    },
+});
+
+export const updateDepartment = new ValidatedMethod({
+    name: 'department.update',
+    // value の型は field に依存し, 既に caller 側で型が合わせられている前提なので, ここではチェックしない
+    validate: args => {
+        check(args, {
+            departmentId: String,
+            field: String,
+            value: Match.Any,
+        });
+    },
+    run: ({ departmentId, field, value }) => {
+        Departments.update({ _id: departmentId }, {
+            $set: {
+                [field]: value,
+            }
         });
     },
 });
