@@ -4,7 +4,6 @@ import { Departments } from '/imports/api/customers/departments.js';
 import { check, Match } from 'meteor/check';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
-import { updateCustomer } from '/imports/api/customers/methods.js';
 
 import './customers.html';
 import './add-customer.js';
@@ -36,7 +35,10 @@ Template.customers.helpers({
         check(year, Match.Integer);
         return { customers: Customers.find({ financialYear: year }) };
     },
-    singleCustomerArg: customer => { return { customers: [customer] } },
+    singleCustomerArg: customer => {
+        check(customer, Object);
+        return { customers: [customer] }
+    },
     departmentsArg: customer => {
         check(customer, Object);
         return { departments: Departments.find({ customer: customer._id }) };
@@ -44,24 +46,5 @@ Template.customers.helpers({
     customerArg: customer => {
         check(customer, Object);
         return { customer };
-    }
-});
-
-Template.customers.events({
-    'change .cell' (event) {
-        event.preventDefault();
-
-        const target = event.target;
-        const customerId = target.id;
-
-        updateCustomer.call({
-            customerId,
-            field: target.form.id,
-            value: parseInt(target.value)
-        }), (error) => {
-            if (error) {
-                console.log('updateCustomer.call', error);
-            }
-        }
     }
 });
