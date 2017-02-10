@@ -46,5 +46,6 @@ Template.customers.helpers({
     customerArg: customer => {
         check(customer, Object);
         return { customer };
-    }
+    },
+    trimAll: string => string.replace(/ /g, ""),
 });

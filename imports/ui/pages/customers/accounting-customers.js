@@ -6,6 +6,7 @@ import './accounting-customers.html';
 Template.accountingCustomers.helpers({
     customerGrossMarginRate: (customer) => customer.grossMargin / customer.sales * 100,
     customerSalesVariableCost: (customer) => customer.salesVariableCost / customer.sales * 100,
+    trimAll: string => string.replace(/ /g, ""),
 });
 
 Template.accountingCustomers.events({

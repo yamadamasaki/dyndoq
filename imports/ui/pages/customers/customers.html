@@ -49,12 +49,12 @@
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h3 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{customer.name}}" aria-expanded="true" aria-controls="{{customer.name}}-collapse">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{trimAll customer.name}}" aria-expanded="true" aria-controls="{{customer.name}}-collapse">
                                         {{customer.name}} 詳細
                                     </a>
                                 </h3>
                             </div>
-                            <div id="{{customer.name}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{customer.name}}-heading">
+                            <div id="{{trimAll customer.name}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{customer.name}}-heading">
                                 <div class="panel-body">
                                     <hr>                    
 

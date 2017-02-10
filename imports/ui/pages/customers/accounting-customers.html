@@ -32,7 +32,9 @@
     {{#each customer in customers}}
     <tr>
     <td>
-        <p>{{customer.name}}</p>
+        <a role="button" href="#{{trimAll customer.name}}">
+            {{customer.name}}
+        </a>
     </td>
     <td>
         <form class="cell" id="sales">
