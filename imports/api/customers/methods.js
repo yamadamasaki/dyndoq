@@ -26,7 +26,7 @@ export const insertCustomer = new ValidatedMethod({
 });
 
 export const updateCustomer = new ValidatedMethod({
-    name: 'customer.update',
+    name: 'customers.update',
     validate: new SimpleSchema({
         customerId: { type: String },
         field: { type: String },
@@ -68,7 +68,7 @@ export const insertDepartment = new ValidatedMethod({
 });
 
 export const updateDepartment = new ValidatedMethod({
-    name: 'department.update',
+    name: 'departments.update',
     // value の型は field に依存し, 既に caller 側で型が合わせられている前提なので, ここではチェックしない
     validate: args => {
         check(args, {
@@ -81,6 +81,28 @@ export const updateDepartment = new ValidatedMethod({
         Departments.update({ _id: departmentId }, {
             $set: {
                 [field]: value,
+            }
+        });
+    },
+});
+
+export const addPersonToDepartment = new ValidatedMethod({
+    name: 'departments.person.push',
+    validate: args => {
+        check(args, {
+            departmentId: String,
+            field: String,
+            person: {
+                name: String,
+                familiality: String,
+            }
+        })
+    },
+    run: ({ departmentId, field, person }) => {
+        console.log('addPersonToDepartment: ', departmentId, field, person);
+        Departments.update({ _id: departmentId }, {
+            $push: {
+                [field]: person,
             }
         });
     },

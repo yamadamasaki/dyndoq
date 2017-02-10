@@ -26,11 +26,13 @@
             <td>
                 {{department.name}}
             </td>
-            <td class="keyPersons">
-                <p>キーマン</p>
+            <td class="keyPersons" id="{{department._id}}-k">
+                {{{persons department.keyPersons}}}
+                {{> personsModal (departmentArgs department 'keyPersons')}}
             </td>
-            <td class="influencer">
-                <p>インフルエンサー</p>
+            <td class="influencers" id="{{department._id}}-i">
+                {{{persons department.influencers}}}
+                {{> personsModal (departmentArgs department 'influencers')}}
             </td>
             <td>
                 <form class="cell integer" id="contentionRatio">
@@ -46,11 +48,9 @@
                     </div>
                 </form>
             </td>
-    </tr>
+        </tr>
             {{/each}}
     </tbody>
-    </table>
-    
-    {{> personsModal}}
+</table>
 
 </template>
