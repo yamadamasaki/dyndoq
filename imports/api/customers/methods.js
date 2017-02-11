@@ -86,8 +86,8 @@ export const updateDepartment = new ValidatedMethod({
     },
 });
 
-export const addPersonToDepartment = new ValidatedMethod({
-    name: 'departments.person.push',
+export const insertPerson = new ValidatedMethod({
+    name: 'deparments.person.insert',
     validate: args => {
         check(args, {
             departmentId: String,
@@ -95,14 +95,43 @@ export const addPersonToDepartment = new ValidatedMethod({
             person: {
                 name: String,
                 familiality: String,
-            }
-        })
+            },
+        });
     },
     run: ({ departmentId, field, person }) => {
-        console.log('addPersonToDepartment: ', departmentId, field, person);
         Departments.update({ _id: departmentId }, {
             $push: {
-                [field]: person,
+                [field]: person
+            }
+        });
+    },
+});
+
+export const updatePerson = new ValidatedMethod({
+    name: 'departments.person.update',
+    validate: args => {
+        check(args, {
+            departmentId: String,
+            field: String,
+            subfield: String,
+            i: Match.Integer,
+            value: String,
+        });
+    },
+    run: ({ departmentId, field, subfield, i, value }) => {
+        const old = Departments.findOne({ _id: departmentId }, {
+            fields: {
+                [field]: 1
+            }
+        });
+        if (!old) {
+            console.log('updatePerson - missing department: ', departmentId);
+            return;
+        }
+        old[field][i][subfield] = value;
+        Departments.update({ _id: departmentId }, {
+            $set: {
+                [field]: old[field],
             }
         });
     },

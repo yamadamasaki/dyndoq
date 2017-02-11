@@ -25,23 +25,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each person in persons}}
+                            {{#each i in (index persons)}}
+                            {{#let person=(nth persons i)}}
                             <tr>
                                 <th>
                                     <form class="cell string" id="personName">
                                         <div class="form-group">
-                                            <input type="text" name="name" placeholder="名前" class="form-control" id="{{department._id}}-{{kind}}" value="{{person.name}}">        
+                                            <input type="text" name="name" placeholder="名前" class="form-control" id="{{department._id}}-{{kind}}-{{i}}" value="{{person.name}}">
                                         </div>
                                     </form>
                                 </th>
                                 <th>
                                     <form class="cell string" id="personFamiliality">
                                         <div class="form-group">
-                                            <input type="text" name="familiality" placeholder="親密度" class="form-control" id="{{department._id}}-{{kind}}" value="{{person.familiality}}">        
+                                            <input type="text" name="familiality" placeholder="親密度" class="form-control" id="{{department._id}}-{{kind}}-{{i}}" value="{{person.familiality}}">
                                         </div>
                                     </form>
                                 </th>
                             </tr>
+                            {{/let}}
                             {{/each}}
                         </tbody> 
                     </table>

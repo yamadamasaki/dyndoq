@@ -1,22 +1,24 @@
 import { Template } from 'meteor/templating';
-import { addPersonToDepartment } from '/imports/api/customers/methods.js';
+import { updatePerson, insertPerson } from '/imports/api/customers/methods.js';
 
 import './persons-modal.html';
+
+Template.personsModal.helpers({
+    index: persons =>
+        persons ? Array(persons.length).fill(1).map((v, i) => i) : [],
+    nth: (persons, i) => persons[i],
+});
 
 Template.personsModal.events({
     'click .add-person' (event) {
         event.preventDefault();
         event.stopPropagation(); // 上位の .keyPerson まで波及しないようにする
 
-        console.log('personModal click .add-person: ', event);
-
         const targetId = event.currentTarget.id;
         if (!targetId) return;
         const [departmentId, kind] = targetId.split('-');
 
-        console.log('.: ', departmentId, kind);
-
-        addPersonToDepartment.call({
+        insertPerson.call({
             departmentId,
             field: kind === 'k' ? 'keyPersons' : 'influencers',
             person: { name: "", familiality: "" },
@@ -30,27 +32,20 @@ Template.personsModal.events({
         event.preventDefault();
         event.stopPropagation(); // 上位の .keyPerson まで波及しないようにする
 
-        console.log('personModal change .cell: ', event);
-
         const target = event.target;
-        const name = target.name.value;
-        const familiality = target.familiality.value;
-
-        if (!name && !familiality) {
-            console.log("personsModal change .cell: ", 'empty name and familiality');
-            return;
-        }
+        const value = target.value;
+        const subfield = target.name;
 
         const targetId = target.id;
         if (!targetId) return;
-        const [departmentId, kind] = targetId.split('-');
+        const [departmentId, kind, i] = targetId.split('-');
 
-        console.log('.: ', departmentId, kind);
-
-        addPersonToDepartment.call({
+        updatePerson.call({
             departmentId,
             field: kind === 'k' ? 'keyPersons' : 'influencers',
-            person: { name, familiality },
+            subfield,
+            value,
+            i: parseInt(i),
         }, (error) => {
             if (error) {
                 console.log('addPersonToDepartment.call', error);
