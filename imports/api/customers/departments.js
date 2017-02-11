@@ -40,9 +40,11 @@ const DepartmentSchema = new SimpleSchema({
     },
     'keyPersons.$.name': { // キーマン名
         type: String,
+        optional: true,
     },
     'keyPersons.$.familiality': { // キーマン親密度
         type: String,
+        optional: true,
         //allowedValues: () => getFamilialityCategory(),
     },
     influencers: { // インフルエンサー
@@ -51,9 +53,11 @@ const DepartmentSchema = new SimpleSchema({
     },
     'influencers.$.name': { // インフルエンサー名
         type: String,
+        optional: true,
     },
     'influencers.$.familiality': { // インフル親密度
         type: String,
+        optional: true,
     },
     contentionRatio: { // 競合率
         type: Number,
