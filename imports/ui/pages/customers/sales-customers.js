@@ -7,8 +7,6 @@ import './persons-modal.js';
 Template.salesCustomers.events({
     'change .cell' (event) {
         event.preventDefault();
-        
-        console.log('salesCustomers change .cell: ', event);
 
         const target = event.target;
         const departmentId = target.id;
@@ -26,8 +24,6 @@ Template.salesCustomers.events({
     'click .keyPersons' (event, template) {
         event.preventDefault();
 
-        console.log('click.keyPersons: ', event);
-
         template.$(`#personsModal-${event.currentTarget.id}`).modal();
     },
     'click .influencers' (event, template) {
@@ -39,16 +35,17 @@ Template.salesCustomers.events({
 
 Template.salesCustomers.helpers({
     departmentArgs: (department, target) => {
-        console.log('departmentArgs: ', department, target);
         if (target === 'keyPersons') {
-            console.log('.: ', target);
             return { department: department, persons: department.keyPersons, title: 'キーパーソン', kind: 'k' };
         } else if (target === 'influencers') {
-            console.log('.: ', target);
             return { department: department, persons: department.influencers, title: 'インフルエンサー', kind: 'i' };
         }
     },
-    persons: persons =>
-        persons ?
-        '<ul>' + persons.map(person => '<li>' + person.name + ' (' + (person.familiality || '?') + ')</li>') : '<p>-</p>',
+    persons: persons => {
+        if (!persons) return '<p>-</p>';
+        let s = '<ul>';
+        persons.forEach(p => { s = s + '<li>' + p.name + ' (' + (p.familiality || '?') + ')</li>' });
+        s = s + '</ul>'
+        return s;
+    },
 });
