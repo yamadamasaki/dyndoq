@@ -69,6 +69,36 @@ const DepartmentSchema = new SimpleSchema({
         optional: true,
         //allowedValues: () => getGrowingExpectationCategory(),
     },
+    // リピート
+    repeatSales: { // リピート金額
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    repeatGrossMargin: { // リピート粗利
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    // 提案
+    propositionSales: { // 提案売上金額
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    propositionGrossMargin: { // 提案売上粗利
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    numberOfSalesCases: { // 売上件数
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    numberOfPropositionCases: { // 提案件数
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    propositionUnitSales: { // 提案単価
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
 });
 
 Departments.attachSchema(DepartmentSchema);
