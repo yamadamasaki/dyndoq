@@ -6,7 +6,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { check, Match } from 'meteor/check';
 
 export const insertCustomer = new ValidatedMethod({
-    name: 'cutomers.insert',
+    name: 'customers.insert',
     validate: new SimpleSchema({
         group: { type: String },
         year: { type: SimpleSchema.Integer },
