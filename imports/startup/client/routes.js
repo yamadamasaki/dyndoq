@@ -6,6 +6,7 @@ import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/customers/customers.js';
+import '../../ui/pages/products/products.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -27,5 +28,14 @@ FlowRouter.route('/customers', {
     name: 'customers',
     action() {
         BlazeLayout.render('App_body', { main: 'customers' });
+    },
+});
+
+FlowRouter.route('/products', {
+    // 商品データベース
+    // query params: year, group
+    name: 'products',
+    action() {
+        BlazeLayout.render('App_body', { main: 'products' });
     },
 });
