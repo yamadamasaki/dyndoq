@@ -48,4 +48,7 @@ Template.salesCustomers.helpers({
         s = s + '</ul>'
         return s;
     },
+    repeatGrossMarginRatio: department => department.repeatGrossMargin / department.repeatSales,
+    propositionGrossMarginRatio: department => department.propositionGrossMargin / department.propositionSales,
+    propositionToSalesRatio: department => department.numberOfSalesCases / department.numberOfPropositionCases,
 });

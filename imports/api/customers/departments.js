@@ -87,18 +87,22 @@ const DepartmentSchema = new SimpleSchema({
         type: SimpleSchema.Integer,
         optional: true,
     },
-    numberOfSalesCases: { // 売上件数
+    numberOfSalesCases: { // 売上件数 -- 提案売り上げが立った件数と仮定する
         type: SimpleSchema.Integer,
         optional: true,
     },
-    numberOfPropositionCases: { // 提案件数
+    numberOfPropositionCases: { // 提案件数 -- 売上に至らなかったものも含んだ提案件数と仮定する
         type: SimpleSchema.Integer,
         optional: true,
     },
-    propositionUnitSales: { // 提案単価
+    /*
+    propositionUnitSales: { // 提案単価 -- 提案売上/提案件数? 提案時の想定売上額の和/提案件数 (= 提案ごとの平均)?
         type: SimpleSchema.Integer,
         optional: true,
     },
+    // 提案粗利率 -- 分子 = 提案粗利額?  分母 = 提案売上金額 or 提案時の想定売上額の和?
+    // 提案粗利額 -- 提案売上粗利/提案件数? 提案時の想定売上粗利の和? 提案時の想定売上粗利の和/提案件数 (=提案後との平均) ?
+    */
 });
 
 Departments.attachSchema(DepartmentSchema);
