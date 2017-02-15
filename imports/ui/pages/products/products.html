@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <blockquote>
-                    <p>このドキュメントは, 当グループが担当する製品についての経理情報をまとめたものです.</p>
+                    <p>このドキュメントは, 当グループが担当する製品についての情報をまとめたものです.</p>
                 </blockquote>
             </div>
         </div>
@@ -18,5 +18,34 @@
         {{> addProduct}}
 
         <hr>
+        
+        <div> <!-- nav nav-tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each year in yearIndex}}
+                <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
+                {{/each}}
+            </ul>   
+            <div class="tab-content">
+                {{#each year in yearIndex}}
+                <div role="tabpanel" class="tab-pane" id="{{year}}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>{{year}} 年度の製品についての基本情報</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>全製品サマリ</h3>
+                        </div>
+                    </div>
+
+                    {{> productsSummary (productsArg year)}}
+
+                </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
+                {{/each}} <!-- year in yearIndex -->
+            </div> <!-- class="tab-content" -->
+        </div> <!-- nav nav-tabs -->
+
     </div>
 </template>

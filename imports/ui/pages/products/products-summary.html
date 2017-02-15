@@ -1,0 +1,49 @@
+<template name="productsSummary">
+<table class="table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <p>製品名</p>
+            </th>
+            <th>
+                <p>売上</p>
+            </th>
+            <th>
+                <p>粗利率</p>
+            </th>
+            <th>
+                <p>粗利額</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each product in products}}
+        <tr>
+            <td>
+                <a role="button" href="#{{trimAll product.name}}">
+                    {{product.name}}
+                </a>
+            </td>
+            <td>
+                <form class="cell" id="sales">
+                    <div class="form-group">
+                        <input type="number" name="value" placeholder="売上" class="form-control" id="{{product._id}}" value={{product.sales}}>        
+                    </div>
+                </form>
+            </td>
+            <td>
+                <p>{{productGrossMarginRate product}}</p>
+            </td>
+            <td>
+                <form class="cell" id="grossMargin">
+                    <div class="form-group">
+                        <input type="number" name="value" placeholder="粗利額" class="form-control" id="{{product._id}}" value={{product.grossMargin}}>        
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+</template>
