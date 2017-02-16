@@ -22,3 +22,19 @@ export const insertProduct = new ValidatedMethod({
         });
     },
 });
+
+export const updateProduct = new ValidatedMethod({
+    name: 'products.update',
+    validate: new SimpleSchema({
+        productId: { type: String },
+        field: { type: String },
+        value: { type: Number },
+    }).validator(),
+    run: ({ productId, field, value }) => {
+        Products.update({ _id: productId }, {
+            $set: {
+                [field]: value,
+            }
+        });
+    },
+});
