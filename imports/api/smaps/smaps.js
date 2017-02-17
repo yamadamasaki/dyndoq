@@ -48,8 +48,8 @@ const SmapSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    element: { // 製品/顧客 の _id
-        type: String,
+    elements: { // 製品/顧客 の _id
+        type: [String],
         optional: true,
     },
 });
