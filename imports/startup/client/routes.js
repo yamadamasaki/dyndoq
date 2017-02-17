@@ -7,6 +7,7 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/customers/customers.js';
 import '../../ui/pages/products/products.js';
+import '../../ui/pages/smaps/smaps.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -32,10 +33,19 @@ FlowRouter.route('/customers', {
 });
 
 FlowRouter.route('/products', {
-    // 商品データベース
+    // 製品データベース
     // query params: year, group
     name: 'products',
     action() {
         BlazeLayout.render('App_body', { main: 'products' });
+    },
+});
+
+FlowRouter.route('/smaps', {
+    // 戦略マップ
+    // query params: year, group
+    name: 'smaps',
+    action() {
+        BlazeLayout.render('App_body', { main: 'smaps' });
     },
 });
