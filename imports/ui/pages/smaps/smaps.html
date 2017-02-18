@@ -19,6 +19,34 @@
     
     <hr>
     
-</div> <!-- container-fluid !-->
+        <div> <!-- nav nav-tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each year in yearIndex}}
+                <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
+                {{/each}}
+            </ul>   
+            <div class="tab-content">
+                {{#each year in yearIndex}}
+                <div role="tabpanel" class="tab-pane" id="{{year}}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>{{year}} 年度の戦略マップ定義</h2>
+                        </div>
+                    </div>
+                    
+                    {{> smapsDef (smapsArg year)}}
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>{{year}} 年度の戦略マップ</h2>
+                        </div>
+                    </div>
+
+                    {{> smapsShow (smapsArg year)}}
+
+                </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
+                {{/each}} <!-- year in yearIndex -->
+            </div> <!-- class="tab-content" -->
+        </div> <!-- nav nav-tabs -->
+</div> <!-- container-fluid !-->
 </template>
