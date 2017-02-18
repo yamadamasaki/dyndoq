@@ -33,8 +33,22 @@
                             <h2>{{year}} 年度の戦略マップ定義</h2>
                         </div>
                     </div>
-                    
-                    {{> smapsDef (smapsArg year)}}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>顧客区分</h3>
+                        </div>
+                    </div>
+
+                    {{> smapsDef (smapsArg year 'customers')}}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>製品区分</h3>
+                        </div>
+                    </div>
+
+                    {{> smapsDef (smapsArg year 'products')}}
 
                     <div class="row">
                         <div class="col-md-12">

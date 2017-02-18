@@ -1,3 +1,28 @@
 <template name="smapsDef">
-    <p>smap show</p>
+    <div class="row">
+        {{#each smap in smaps}}
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th scope="row">区分名</th>
+                                <td>{{smap.name}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">区分条件</th>
+                                <td>{{smap.criteria}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">区分メモ</th>
+                                <td>{{smap.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- "panel-body" -->
+            </div> <!-- "panel panel-default" -->
+        </div> <!-- col-md-3 -->
+        {{/each}}
+    </div> <!-- "row" -->
 </template>

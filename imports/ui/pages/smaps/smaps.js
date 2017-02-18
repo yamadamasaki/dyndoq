@@ -23,8 +23,8 @@ Template.smaps.helpers({
         .map(x => x.financialYear)
         .sort((x, y) => y - x)
         .filter((x, i, self) => self.indexOf(x) === i), //unique()
-    smapsArg: year => {
+    smapsArg: (year, elementType) => {
         check(year, Match.Integer);
-        return { smaps: Smaps.find({ financialYear: year }) };
+        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType: elementType };
     },
 });
