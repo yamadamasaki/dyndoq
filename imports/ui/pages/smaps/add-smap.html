@@ -2,8 +2,8 @@
     <ul>
         <li>戦略マップ区分を新たに追加しますか?</li>
         <ul>
-            <li>
-                <form class="add-smap form-inline">
+            <form class="add-smap form-inline">
+                <li>
                     <div class="form-group">
                         <input type="number" name="year" placeholder="年度" class="form-control" id="year">
                         <label for="year">年度の</label>
@@ -18,14 +18,31 @@
                         <label>の戦略マップ区分</label>
                     </div>
                      <div class="form-group">
-                        <input type="text" name="name" placeholder="区分名" class="form-control" id="smap">
-                        <label for="smap">を</label>
+                        <input type="text" name="name" placeholder="区分名 (オプション)" class="form-control" id="smap">
+                        <label for="smap">, </label>
                     </div>
+                </li>
+                <li>
                     <div class="form-group">
+                        <label for="description">区分条件</label>
+                        <textarea rows="2" name="criteria" placeholder="区分条件" class="form-control" id="criteria"></textarea>
+                        <label for="description">, </label>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label for="description">区分メモ</label>
+                        <textarea rows="2" name="decsription" placeholder="区分メモ (オプション)" class="form-control" id="description"></textarea>
+                        <label for="description">, </label>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label for="smap">を</label>
                         <button type="submit" name="submit" class="btn btn-default">追加</button> する!
                     </div>
-                </form>
-            </li>
+                </li>
+            </form>
         </ul>
     </ul>
 </template>

@@ -40,15 +40,19 @@ const SmapSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    description: {
+    criteria: { // 内容
         type: String,
         optional: true,
     },
-    color: {
+    description: { // メモ
         type: String,
         optional: true,
     },
-    elements: { // 製品/顧客 の _id
+    color: { // 表示色
+        type: String,
+        optional: true,
+    },
+    elements: { // 対象製品/顧客 の _id
         type: [String],
         optional: true,
     },

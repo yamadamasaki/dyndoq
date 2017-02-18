@@ -10,18 +10,30 @@ Template.addSmap.events({
         event.preventDefault();
 
         const target = event.target;
-        const [year, name, elementType] = [target.year.value, target.name.value, target.elementType.value];
+        const [
+            year,
+            name,
+            elementType,
+            criteria,
+            description
+        ] = [
+            target.year.value,
+            target.name.value,
+            target.elementType.value,
+            target.criteria.value,
+            target.description.value
+        ];
         const group = ingroup(FlowRouter.getQueryParam('group'));
         if (!group) {
             console.log("illeagal group: ", group);
             return;
         }
 
-        insertSmap.call({ group, year, name, elementType }, (error) => {
+        insertSmap.call({ group, year, name, elementType, description, criteria }, (error) => {
             if (error) {
                 console.log('insertSmap.call', error);
             } else {
-                target.year.value = target.name.value = '';
+                target.criteria.value = target.description.value = target.year.value = target.name.value = '';
             }
         });
     },

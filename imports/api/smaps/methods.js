@@ -10,8 +10,10 @@ export const insertSmap = new ValidatedMethod({
         year: { type: SimpleSchema.Integer },
         name: { type: String },
         elementType: { type: String },
+        criteria: { type: String },
+        description: { type: String },
     }).validator(),
-    run: ({ group, year, name, elementType }) => {
+    run: ({ group, year, name, elementType, description, criteria }) => {
         return Smaps.insert({
             _tenant: Meteor.users.findOne({ _id: Meteor.userId() }, { fields: { 'tenant': 1 } }).tenant,
             _service: 'sales-reinforcement',
@@ -21,6 +23,8 @@ export const insertSmap = new ValidatedMethod({
             financialYear: parseInt(year),
             name,
             elementType,
+            criteria,
+            description,
         });
     },
 });
