@@ -28,3 +28,19 @@ export const insertSmap = new ValidatedMethod({
         });
     },
 });
+
+export const updateSmap = new ValidatedMethod({
+    name: 'smaps.update',
+    validate: new SimpleSchema({
+        smapId: { type: String },
+        field: { type: String },
+        value: { type: String },
+    }).validator(),
+    run: ({ smapId, field, value }) => {
+        Smaps.update({ _id: smapId }, {
+            $set: {
+                [field]: value,
+            }
+        });
+    },
+});

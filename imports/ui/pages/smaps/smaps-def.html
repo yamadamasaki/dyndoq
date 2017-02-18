@@ -8,15 +8,37 @@
                         <tbody>
                             <tr>
                                 <th scope="row">区分名</th>
-                                <td>{{smap.name}}</td>
+                                <td>
+                                    <form class="cell" id="name">
+                                        <div class="form-group">
+                                            <input type="text" name="value" placeholder="名前" class="form-control" id="{{smap._id}}" value={{smap.name}}>        
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">区分条件</th>
-                                <td>{{smap.criteria}}</td>
+                                <td>
+                                    <form class="cell" id="criteria">
+                                        <div class="form-group">
+                                            <textarea rows="2" name="value" placeholder="区分条件" class="form-control" id="{{smap._id}}">
+                                                {{smap.criteria}}
+                                            </textarea>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">区分メモ</th>
-                                <td>{{smap.description}}</td>
+                                <td>
+                                    <form class="cell" id="description">
+                                        <div class="form-group">
+                                            <textarea rows="2" name="value" placeholder="区分メモ" class="form-control" id="{{smap._id}}">
+                                                {{smap.description}}
+                                            </textarea>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
