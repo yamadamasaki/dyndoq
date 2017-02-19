@@ -2,20 +2,17 @@
     <div class="row">
         {{#each smap in smaps}}
         <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <form class="cell" id="name">
+                        <div class="form-group">
+                            <input type="text" name="value" placeholder="名前" class="form-control" id="{{smap._id}}" value={{smap.name}}>        
+                        </div>
+                    </form>
+                </div>
                 <div class="panel-body">
                     <table>
                         <tbody>
-                            <tr>
-                                <th scope="row">区分名</th>
-                                <td>
-                                    <form class="cell" id="name">
-                                        <div class="form-group">
-                                            <input type="text" name="value" placeholder="名前" class="form-control" id="{{smap._id}}" value={{smap.name}}>        
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
                             <tr>
                                 <th scope="row">区分条件</th>
                                 <td>
