@@ -38,7 +38,6 @@ const SmapSchema = new SimpleSchema({
     },
     name: { // 区分名
         type: String,
-        optional: true,
     },
     criteria: { // 内容
         type: String,
