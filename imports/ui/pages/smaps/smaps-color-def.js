@@ -1,0 +1,1 @@
+import './smaps-color-def.html';

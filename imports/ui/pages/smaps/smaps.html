@@ -52,11 +52,19 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            <h3>色の割当て</h3>
+                        </div>
+                    </div>
+
+                    {{> smapsColorDef (smapsAllArg year)}}
+
+                    <div class="row">
+                        <div class="col-md-12">
                             <h2>{{year}} 年度の戦略マップ</h2>
                         </div>
                     </div>
 
-                    {{> smapsShow (smapsArg year)}}
+                    {{> smapsShow (smapsAllArg year)}}
 
                 </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
                 {{/each}} <!-- year in yearIndex -->

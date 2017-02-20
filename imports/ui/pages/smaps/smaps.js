@@ -9,6 +9,7 @@ import './smaps.html';
 import './add-smap.js';
 import './smaps-def.js';
 import './smaps-show.js';
+import './smaps-color-def.js';
 
 Template.smaps.onCreated(() => {
     Tracker.autorun(() => {
@@ -25,6 +26,13 @@ Template.smaps.helpers({
         .filter((x, i, self) => self.indexOf(x) === i), //unique()
     smapsArg: (year, elementType) => {
         check(year, Match.Integer);
-        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType: elementType };
+        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType };
+    },
+    smapsAllArg: year => {
+        check(year, Match.Integer);
+        return {
+            customersSmaps: Smaps.find({ financialYear: year, elementType: 'customers' }),
+            productsSmaps: Smaps.find({ financialYear: year, elementType: 'products' }),
+        };
     },
 });

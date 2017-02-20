@@ -1,0 +1,27 @@
+<template name="smapsColorDef">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                {{#each cSmap in customersSmaps}}
+                <th>
+                    {{cSmap.name}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            <tr></tr>
+            {{#each pSmap in productsSmaps}}
+            <tr>
+                <th scode="row">{{pSmap.name}}</th>
+                {{#each cSmap in customersSmaps}}
+                <td>
+                    {{cSmap.name}}
+                </td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>
