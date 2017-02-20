@@ -5,6 +5,7 @@ import { insertSmap } from '/imports/api/smaps/methods.js';
 import { Smaps } from '/imports/api/smaps/smaps.js';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import './add-smap.html';
 
@@ -41,8 +42,10 @@ Template.addSmap.events({
         insertSmap.call({ group, year, name, elementType, description, criteria }, (error) => {
             if (error) {
                 console.log('insertSmap.call', error);
+                Bert.alert('戦略マップ区分を追加できませんでした', 'danger', 'growl-top-right');
             } else {
                 target.criteria.value = target.description.value = target.year.value = target.name.value = '';
+                Bert.alert('戦略マップ区分を追加しました', 'success', 'growl-top-right');
             }
         });
     },
