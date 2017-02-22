@@ -21,9 +21,9 @@
     border: 1px solid #000;
 }
 
-#selected-color2 i {
+.bootstrap-colorpalette i {
     display: inline-block;
     font-weight: bold;
-    width: 20px;
+    width: 40px;
     text-align: center;
 }

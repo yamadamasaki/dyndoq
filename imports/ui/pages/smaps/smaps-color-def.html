@@ -17,7 +17,19 @@
                 <th scode="row">{{pSmap.name}}</th>
                 {{#each cSmap in customersSmaps}}
                 <td>
-                    {{cSmap.name}}
+                    <div class="btn-group">
+                        <a id="{{cSmap._id}}-{{pSmap._id}}-color" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="bootstrap-colorpalette">色指定</i></a>
+                        <ul class="dropdown-menu" style="width:293px;">
+                            <li style="display:inline-block;">
+                            <div>&nbsp;文字色</div>
+                            <div id="{{cSmap._id}}-{{pSmap._id}}-fgpalette"></div>
+                            </li>
+                            <li style="display:inline-block;">
+                            <div>&nbsp;背景色</div>
+                            <div id="{{cSmap._id}}-{{pSmap._id}}-bgpalette"></div>
+                            </li>
+                        </ul>
+                    </div>
                 </td>
                 {{/each}}
             </tr>
