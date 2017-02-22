@@ -35,13 +35,11 @@ Template.smapsDef.events({
     'click .set-customers' (event, template) {
         event.preventDefault();
 
-        console.log('add-customer: ', event, event.currentTarget.id);
         template.$(`#smapModal-${event.currentTarget.id}`).modal('show');
     },
     'click .set-products' (event, template) {
         event.preventDefault();
 
-        console.log('add-product: ', event, event.currentTarget.id);
         template.$(`#smapModal-${event.currentTarget.id}`).modal('show');
     },
 });
@@ -49,14 +47,11 @@ Template.smapsDef.events({
 Template.smapsDef.helpers({
     isCustomer: elementType => elementType === 'customers',
     elementsArgs: (smap, kind) => {
-        console.log('elementsArgs: ', smap, kind);
         if (kind === 'customers') {
             const targets = Customers.find({ financialYear: smap.financialYear, _group: smap._group });
-            console.log(".: ", targets.fetch());
             return { targets, smap, kind };
         } else { // products
             const targets = Products.find({ financialYear: smap.financialYear, _group: smap._group });
-            console.log(".: ", targets.fetch());
             return { targets, smap, kind };
         }
     }
