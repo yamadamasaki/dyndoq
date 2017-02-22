@@ -16,11 +16,11 @@ const SmapColorSchema = new SimpleSchema({
     },
     fgcolor: {
         type: String,
-        defaultValue: '#000000', // black
+        optional: true,
     },
     bgcolor: {
         type: String,
-        defaultValue: '#ffffff', // white
+        optional: true,
     },
 });
 

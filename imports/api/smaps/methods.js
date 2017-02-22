@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Smaps } from '/imports/api/smaps/smaps.js';
+import { SmapColors } from '/imports/api/smaps/smap-colors.js';
 
 export const insertSmap = new ValidatedMethod({
     name: 'smaps.insert',
@@ -43,4 +44,21 @@ export const updateSmap = new ValidatedMethod({
             }
         });
     },
+});
+
+export const upsertSmapColor = new ValidatedMethod({
+    name: 'smap-colors.upsert',
+    validate: new SimpleSchema({
+        customersSmapId: { type: String },
+        productsSmapId: { type: String },
+        kind: { type: String, allowedValues: ['fg', 'bg', 'both', 'none'] },
+        fgcolor: { type: String, regEx: /#[0-9a-fA-F]{6}/, optional: true },
+        bgcolor: { type: String, regEx: /#[0-9a-fA-F]{6}/, optional: true },
+    }).validator(),
+    run: ({ customersSmapId, productsSmapId, kind, fgcolor, bgcolor }) => {
+        let colors = {};
+        if (kind === 'fg' || kind === 'both') colors.fgcolor = fgcolor;
+        if (kind === 'bg' || kind === 'both') colors.bgcolor = bgcolor;
+        SmapColors.upsert({ customersSmapId, productsSmapId }, { $set: colors }, true);
+    }
 });
