@@ -40,6 +40,15 @@
                         </tbody>
                     </table>
                 </div> <!-- "panel-body" -->
+                <div class="panel-footer">
+                    {{# if isCustomer smap.elementType}}
+                    <button class="btn btn-default set-customers" id="{{smap._id}}-{{smap.elementType}}" type="submit">区分に顧客を設定する</button>
+                    {{> smapModal (elementsArgs smap 'customers')}}
+                    {{else}}
+                    <button class="btn btn-default set-products" id="{{smap._id}}-{{smap.elementType}}" type="submit">区分に製品を設定する</button>
+                    {{> smapModal (elementsArgs smap 'products')}}
+                    {{/if}}
+                </div> <!-- "panel-footer" -->
             </div> <!-- "panel panel-default" -->
         </div> <!-- col-md-3 -->
         {{/each}}

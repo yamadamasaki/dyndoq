@@ -26,7 +26,7 @@ Template.smaps.helpers({
         .filter((x, i, self) => self.indexOf(x) === i), //unique()
     smapsArg: (year, elementType) => {
         check(year, Match.Integer);
-        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType };
+        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType, year };
     },
     smapsAllArg: year => {
         check(year, Match.Integer);
