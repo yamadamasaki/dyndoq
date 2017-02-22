@@ -1,11 +1,29 @@
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 import { upsertSmapColor } from '/imports/api/smaps/methods.js';
+import { Tracker } from 'meteor/tracker';
+import { Meteor } from 'meteor/meteor';
+import { SmapColors } from '/imports/api/smaps/smap-colors.js';
 
 import './smaps-color-def.html';
 
 Template.smapsColorDef.helpers({
+    fgcolor: (cSmapId, pSmapId) => {
+        const black = '#000000';
+        const c = SmapColors.findOne({ customersSmapId: cSmapId, productsSmapId: pSmapId });
+        return c ? c.fgcolor || black : black;
+    },
+    bgcolor: (cSmapId, pSmapId) => {
+        const white = '#ffffff';
+        const c = SmapColors.findOne({ customersSmapId: cSmapId, productsSmapId: pSmapId });
+        return c ? c.bgcolor || white : white;
+    },
+});
 
+Template.smapsColorDef.onCreated(() => {
+    Tracker.autorun(() => {
+        Meteor.subscribe('smap-colors.all');
+    });
 });
 
 Template.smapsColorDef.events({
