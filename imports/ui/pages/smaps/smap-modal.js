@@ -15,7 +15,7 @@ Template.smapModal.onCreated(() => {
 });
 
 Template.smapModal.events({
-    'submit .smap-customers': event => {
+    'submit .smap-customers,.smap-products': event => {
         event.preventDefault();
 
         const target = event.target;
@@ -39,13 +39,6 @@ Template.smapModal.events({
         }
 
         $('#' + modal).modal('hide');
-    },
-    'submit .smap-products': event => {
-        event.preventDefault();
-
-        console.log("submit .smap-products : ", event);
-
-        $('#smapModal').modal('hide');
     },
 });
 
