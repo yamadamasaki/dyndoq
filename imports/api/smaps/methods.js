@@ -46,6 +46,17 @@ export const updateSmap = new ValidatedMethod({
     },
 });
 
+export const addToSmap = new ValidatedMethod({
+    name: 'smaps.addto',
+    validate: new SimpleSchema({
+        smapId: { type: String },
+        elements: { type: [String] },
+    }).validator(),
+    run: ({ smapId, elements }) => {
+        Smaps.update({ _id: smapId }, { $set: { elements, } });
+    }
+});
+
 export const upsertSmapColor = new ValidatedMethod({
     name: 'smap-colors.upsert',
     validate: new SimpleSchema({
