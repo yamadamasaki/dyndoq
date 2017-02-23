@@ -3,6 +3,8 @@ import { Smaps } from '/imports/api/smaps/smaps.js';
 import { SmapColors } from '/imports/api/smaps/smap-colors.js';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { Customers } from '/imports/api/customers/customers.js';
+import { Products } from '/imports/api/products/products.js';
 
 import './smaps-show.html';
 
@@ -10,6 +12,8 @@ Template.smapsShow.onCreated(() => {
     Tracker.autorun(() => {
         Meteor.subscribe('smaps.all');
         Meteor.subscribe('smap-colors.all');
+        Meteor.subscribe('customers.all');
+        Meteor.subscribe('products.all');
     });
 });
 
@@ -24,7 +28,21 @@ Template.smapsShow.helpers({
         const c = findSmapColor(cId, pId, year);
         return c ? c.bgcolor || white : white;
     },
-
+    customers: ids => {
+        return ids ? ids.map(e => {
+            return Customers.findOne(e);
+        }) : [];
+    },
+    products: ids => {
+        return ids ? ids.map(e => {
+            return Products.findOne(e);
+        }) : [];
+    },
+    inc: n => n + 1,
+    isFirst: (product, elements) => {
+        if (!product || !elements || elements.length === 0) return false;
+        return elements[0] === product._id;
+    },
 });
 
 function findSmapColor(cId, pId, year) {

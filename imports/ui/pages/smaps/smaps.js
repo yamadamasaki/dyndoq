@@ -3,8 +3,6 @@ import { check, Match } from 'meteor/check';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
-import { Customers } from '/imports/api/customers/customers.js'
-import { Products } from '/imports/api/products/products.js'
 
 import './smaps.html';
 
@@ -37,11 +35,4 @@ Template.smaps.helpers({
             productsSmaps: Smaps.find({ financialYear: year, elementType: 'products' }),
         };
     },
-    candpAllArg: year => {
-        check(year, Match.Integer);
-        return {
-            customers: Customers.find({ financialYear: year }),
-            products: Products.find({ financialYear: year }),
-        };
-    }
 });

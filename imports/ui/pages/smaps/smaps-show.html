@@ -1,24 +1,46 @@
 <template name="smapsShow">
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th></th>
-                {{#each customer in customers}}
+                <th></th>
+                {{#each cSmap in customersSmaps}}
+                <th colspan="{{inc cSmap.elements.length}}">{{cSmap.name}}</th>
+                {{/each}}
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                {{#each cSmap in customersSmaps}}
+                {{#each customer in (customers cSmap.elements)}}
                 <th>{{customer.name}}</th>
+                {{/each}}
+                <th>新規顧客</th>
                 {{/each}}
             </tr>
         </thead>
         <tbody>
             <tr></tr>
-            {{#each product in products}}
+            <tr></tr>
+            {{#each pSmap in productsSmaps}}
+            {{#each product in (products pSmap.elements)}}
             <tr>
+                {{#let first=(isFirst product pSmap.elements)}}
+                {{#if first}}
+                <th scope="row" rowspan="{{pSmap.elements.length}}">{{pSmap.name}}</th>
+                {{/if}}
+                {{/let}}
                 <th scope="row">{{product.name}}</th>
-                {{#each customer in customers}}
+                {{#each cSmap in customersSmaps}}
+                {{#each customer in (customers cSmap.elements)}}
                 <td style="color:{{fgcolor customer._id product._id customer.financialYear}};background-color:{{bgcolor customer._id product._id customer.financialYear}}">
                     XXXX
                 </td>
                 {{/each}}
+                <td>new</td>
+                {{/each}}
             </tr>
+            {{/each}}
             {{/each}}
         </tbody>
     </table>
