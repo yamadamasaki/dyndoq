@@ -54,5 +54,10 @@ Template.smapsDef.helpers({
             const targets = Products.find({ financialYear: smap.financialYear, _group: smap._group });
             return { targets, smap, kind };
         }
+    },
+    elementName: (elementId, elementType) => {
+        const collection = elementType === 'customers' ? Customers : Products;
+        const element = collection.findOne(elementId);
+        return element ? element.name : '';
     }
 });

@@ -10,7 +10,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="panel-body">
                     <table class="table">
                         <tbody>
                             <tr>
@@ -39,7 +38,11 @@
                             </tr>
                         </tbody>
                     </table>
-                </div> <!-- "panel-body" -->
+                <ul class="list-group">
+                    {{#each element in smap.elements}}
+                    <li class="list-group-item">{{elementName element smap.elementType}}</li>
+                    {{/each}}
+                </ul><!-- "list-group" -->
                 <div class="panel-footer">
                     {{# if isCustomer smap.elementType}}
                     <button class="btn btn-default set-customers" id="{{smap._id}}-{{smap.elementType}}" type="submit">区分に顧客を設定する</button>
