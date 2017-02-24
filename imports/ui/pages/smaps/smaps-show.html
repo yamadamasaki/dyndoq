@@ -43,7 +43,16 @@
                     </form>
                 </td>
                 {{/each}}
-                <td>new</td>
+                <td>
+                    <form class="cell" id="sales-new">
+                        <div class="form-group">
+                            <input type="number" name="value" placeholder="売上" class="form-control"
+                            id="{{cSmap._id}}-{{product._id}}-sales"
+                            value="{{detail cSmap._id product._id 'sales'}}">
+                        </div>
+                    </form>
+ 
+                </td>
                 {{/each}}
             </tr>
             {{/each}}

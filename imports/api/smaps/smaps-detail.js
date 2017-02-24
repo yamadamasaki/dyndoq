@@ -14,9 +14,6 @@ const SmapsDetailSchema = new SimpleSchema({
     productId: {
         type: String, // _id
     },
-    newCustomers: {
-        type: Boolean, // default: false
-    },
     grossMargin: { // 粗利額
         type: SimpleSchema.Integer,
         optional: true,
