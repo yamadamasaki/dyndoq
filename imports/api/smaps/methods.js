@@ -3,6 +3,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Smaps } from '/imports/api/smaps/smaps.js';
 import { SmapColors } from '/imports/api/smaps/smap-colors.js';
+import { SmapsDetail } from '/imports/api/smaps/smaps-detail.js';
 
 export const insertSmap = new ValidatedMethod({
     name: 'smaps.insert',
@@ -72,4 +73,21 @@ export const upsertSmapColor = new ValidatedMethod({
         if (kind === 'bg' || kind === 'both') colors.bgcolor = bgcolor;
         SmapColors.upsert({ customersSmapId, productsSmapId }, { $set: colors }, true);
     }
+});
+
+export const upsertSmapsDetail = new ValidatedMethod({
+    name: 'smaps-detail.upsert',
+    validate: new SimpleSchema({
+        customerId: { type: String },
+        productId: { type: String },
+        field: { type: String },
+        value: { type: Number },
+    }).validator(),
+    run: ({ customerId, productId, field, value }) => {
+        SmapsDetail.upsert({ customerId, productId }, {
+            $set: {
+                [field]: value,
+            }
+        });
+    },
 });

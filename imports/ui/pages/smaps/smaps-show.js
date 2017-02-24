@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { Customers } from '/imports/api/customers/customers.js';
 import { Products } from '/imports/api/products/products.js';
 import { check } from 'meteor/check';
+import { upsertSmapsDetail } from '/imports/api/smaps/methods.js';
 
 import './smaps-show.html';
 
@@ -54,6 +55,27 @@ Template.smapsShow.helpers({
                 [kind]: 1
             }
         });
+    },
+});
+
+Template.smapsShow.events({
+    'change .cell' (event) {
+        event.preventDefault();
+
+        const target = event.target;
+        const field = event.currentTarget.id;
+        const [customerId, productId] = target.id.split('-');
+
+        upsertSmapsDetail.call({
+            customerId,
+            productId,
+            field,
+            value: Number(target.value),
+        }), (error) => {
+            if (error) {
+                console.log('upsertSmapsDetail.call', error);
+            }
+        }
     },
 });
 
