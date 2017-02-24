@@ -34,7 +34,13 @@
                 {{#each cSmap in customersSmaps}}
                 {{#each customer in (customers cSmap.elements)}}
                 <td style="color:{{fgcolor customer._id product._id customer.financialYear}};background-color:{{bgcolor customer._id product._id customer.financialYear}}">
-                    XXXX
+                    <form class="cell" id="sales">
+                        <div class="form-group">
+                            <input type="number" name="value" placeholder="売上" class="form-control"
+                            id="{{customer._id}}-{{product._id}}-sales"
+                            value="{{detail customer._id product._id 'sales'}}"> 
+                        </div>
+                    </form>
                 </td>
                 {{/each}}
                 <td>new</td>

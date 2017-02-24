@@ -1,10 +1,12 @@
 import { Template } from 'meteor/templating';
 import { Smaps } from '/imports/api/smaps/smaps.js';
 import { SmapColors } from '/imports/api/smaps/smap-colors.js';
+import { SmapsDetail } from '/imports/api/smaps/smaps-detail.js';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 import { Customers } from '/imports/api/customers/customers.js';
 import { Products } from '/imports/api/products/products.js';
+import { check } from 'meteor/check';
 
 import './smaps-show.html';
 
@@ -42,6 +44,16 @@ Template.smapsShow.helpers({
     isFirst: (product, elements) => {
         if (!product || !elements || elements.length === 0) return false;
         return elements[0] === product._id;
+    },
+    detail: (customerId, productId, kind) => {
+        check(customerId, String);
+        check(productId, String);
+        check(kind, String);
+        return SmapsDetail.find({ customerId, productId }, {
+            field: {
+                [kind]: 1
+            }
+        });
     },
 });
 
