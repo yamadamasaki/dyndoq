@@ -17,6 +17,7 @@ Template.smapsShow.onCreated(() => {
         Meteor.subscribe('smap-colors.all');
         Meteor.subscribe('customers.all');
         Meteor.subscribe('products.all');
+        Meteor.subscribe('smaps-detail.all');
     });
 });
 
@@ -50,11 +51,10 @@ Template.smapsShow.helpers({
         check(customerId, String);
         check(productId, String);
         check(kind, String);
-        return SmapsDetail.find({ customerId, productId }, {
-            field: {
-                [kind]: 1
-            }
+        const d = SmapsDetail.findOne({ customerId, productId }, {
+            [kind]: 1
         });
+        return d && d[kind];
     },
 });
 
