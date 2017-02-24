@@ -8,11 +8,14 @@ const SmapsDetailSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    customerId: {
+    customerId: { // customers._id or smaps._id (when newCustomers == true)
         type: String, // _id
     },
     productId: {
         type: String, // _id
+    },
+    newCustomers: {
+        type: Boolean, // default: false
     },
     grossMargin: { // 粗利額
         type: SimpleSchema.Integer,
