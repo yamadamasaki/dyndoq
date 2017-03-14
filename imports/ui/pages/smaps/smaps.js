@@ -35,4 +35,24 @@ Template.smaps.helpers({
             productsSmaps: Smaps.find({ financialYear: year, elementType: 'products' }),
         };
     },
+    smapsShowArg: (year, metric) => {
+        return {
+            customersSmaps: Smaps.find({ financialYear: year, elementType: 'customers' }),
+            productsSmaps: Smaps.find({ financialYear: year, elementType: 'products' }),
+            metric: metric,
+        }
+    },
+    metrics: () => {
+        return [
+            { title: '粗利益額', name: 'grossMargin', },
+            { title: '粗利益率', name: 'grossMarginRate', },
+            { title: '売上額', name: 'sales', },
+            { title: '変動費', name: 'variableCost', },
+            { title: '変動費率', name: 'variableCostRate', },
+            { title: '限界利益額', name: 'marginalProfit', },
+            { title: '限界利益率', name: 'marginalProfitRate', },
+            { title: '在庫', name: 'stock', },
+        ];
+    },
+    trimAll: string => string.replace(/ /g, ""),
 });

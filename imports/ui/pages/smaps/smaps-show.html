@@ -34,21 +34,21 @@
                 {{#each cSmap in customersSmaps}}
                 {{#each customer in (customers cSmap.elements)}}
                 <td style="color:{{fgcolor customer._id product._id customer.financialYear}};background-color:{{bgcolor customer._id product._id customer.financialYear}}">
-                    <form class="cell" id="sales">
+                    <form class="cell" id="{{metric.name}}">
                         <div class="form-group">
-                            <input type="number" name="value" placeholder="売上" class="form-control"
-                            id="{{customer._id}}-{{product._id}}-sales"
-                            value="{{detail customer._id product._id 'sales'}}"> 
+                            <input type="number" name="value" class="form-control"
+                            id="{{customer._id}}-{{product._id}}-{{metric.name}}"
+                            value="{{detail customer._id product._id metric.name}}"> 
                         </div>
                     </form>
                 </td>
                 {{/each}}
                 <td>
-                    <form class="cell" id="sales">
+                    <form class="cell" id="{{metric.name}}">
                         <div class="form-group">
-                            <input type="number" name="value" placeholder="売上" class="form-control"
-                            id="{{cSmap._id}}-{{product._id}}-sales"
-                            value="{{detail cSmap._id product._id 'sales'}}">
+                            <input type="number" name="value" class="form-control"
+                            id="{{cSmap._id}}-{{product._id}}-{{metric.name}}"
+                            value="{{detail cSmap._id product._id metric.name}}">
                         </div>
                     </form>
                 </td>

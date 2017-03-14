@@ -1,5 +1,5 @@
 <template name="smaps">
-    <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h1>戦略マップ</h1>
@@ -18,57 +18,74 @@
     {{> addSmap}}
     
     <hr>
-    
-        <div> <!-- nav nav-tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                {{#each year in yearIndex}}
-                <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
-                {{/each}}
-            </ul>   
-            <div class="tab-content">
-                {{#each year in yearIndex}}
-                <div role="tabpanel" class="tab-pane" id="{{year}}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>{{year}} 年度の戦略マップ定義</h2>
-                        </div>
+
+    <div> <!-- nav nav-tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            {{#each year in yearIndex}}
+            <li role="presentation"><a href="#{{year}}" aria-controls="{{year}}" role="tab" data-toggle="tab">{{year}}</a></li>
+            {{/each}}
+        </ul>   
+        <div class="tab-content">
+            {{#each year in yearIndex}}
+            <div role="tabpanel" class="tab-pane" id="{{year}}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>{{year}} 年度の戦略マップ定義</h2>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>顧客区分</h3>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>顧客区分</h3>
                     </div>
+                </div>
 
-                    {{> smapsDef (smapsArg year 'customers')}}
+                {{> smapsDef (smapsArg year 'customers')}}
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>製品区分</h3>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>製品区分</h3>
                     </div>
+                </div>
 
-                    {{> smapsDef (smapsArg year 'products')}}
+                {{> smapsDef (smapsArg year 'products')}}
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>色の割当て</h3>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>色の割当て</h3>
                     </div>
+                </div>
 
-                    {{> smapsColorDef (smapsAllArg year)}}
+                {{> smapsColorDef (smapsAllArg year)}}
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>{{year}} 年度の戦略マップ</h2>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>{{year}} 年度の戦略マップ</h2>
                     </div>
+                </div>
 
-                    {{> smapsShow (smapsAllArg year)}}
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    {{#each metric in metrics}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{metric.name}}" aria-expanded="true" aria-controls="{{metric.name}}-collapse">
+                                    {{metric.title}}
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="{{metric.name}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{metric.name}}-heading">
+                            <div class="panel-body">
+                                {{> smapsShow (smapsShowArg year metric)}}
+                            </div> <!-- class="panel-body" -->
+                        </div> <!-- id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" -->
+                    </div> <!-- class="panel panel-default" -->
+                    {{/each}} <!-- customer in (customer year) -->
+                </div> <!-- class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" -->
 
-                </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
-                {{/each}} <!-- year in yearIndex -->
-            </div> <!-- class="tab-content" -->
-        </div> <!-- nav nav-tabs -->
+            </div> <!-- role="tabpanel" class="tab-pane" id="{{year}}" -->
+            {{/each}} <!-- year in yearIndex -->
+        </div> <!-- class="tab-content" -->
+    </div> <!-- nav nav-tabs -->
 </div> <!-- container-fluid !-->
 </template>
