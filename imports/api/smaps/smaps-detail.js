@@ -18,6 +18,10 @@ const SmapsDetailSchema = new SimpleSchema({
         type: SimpleSchema.Integer,
         optional: true,
     },
+    grossMarginRate: { // 粗利率
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
     sales: { // 売上
         type: SimpleSchema.Integer,
         optional: true,
@@ -26,7 +30,15 @@ const SmapsDetailSchema = new SimpleSchema({
         type: SimpleSchema.Integer,
         optional: true,
     },
+    marginalProfitRate: { // 限界利益率
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
     variableCost: { // 変動費
+        type: SimpleSchema.Integer,
+        optional: true,
+    },
+    variableCostRate: { // 変動費率
         type: SimpleSchema.Integer,
         optional: true,
     },
