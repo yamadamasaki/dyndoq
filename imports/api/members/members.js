@@ -83,6 +83,10 @@ const MemberSchema = new SimpleSchema({
         decimal: true,
         optional: true,
     },
+    inChargeOf: { // 担当顧客部署
+        type: [String], // DepartmentId
+        optional: true,
+    }
 });
 
 Members.attachSchema(MemberSchema);
