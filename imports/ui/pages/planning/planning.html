@@ -1,5 +1,17 @@
 <template name="planning">
-    <div class="container-fluid">
-        <p>PLANNING</p>
+    <div class='examples'>
+    <div class='parent'>
+        <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer? Great stuff.</label>
+        <div class='wrapper'>
+        <div id='left1' class='container'>
+            {{#each items}}
+            <div>{{name}}</div>
+            {{/each}}
+        </div>
+        <div id='right1' class='container'>
+            <div>hello</div>
+        </div>
+        </div>
+    </div>
     </div>
 </template>
