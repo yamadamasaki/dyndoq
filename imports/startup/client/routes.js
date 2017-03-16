@@ -8,6 +8,7 @@ import '../../ui/pages/not-found/not-found.js';
 import '../../ui/pages/customers/customers.js';
 import '../../ui/pages/products/products.js';
 import '../../ui/pages/smaps/smaps.js';
+import '../../ui/pages/planning/planning.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -47,5 +48,14 @@ FlowRouter.route('/smaps', {
     name: 'smaps',
     action() {
         BlazeLayout.render('App_body', { main: 'smaps' });
+    },
+});
+
+FlowRouter.route('/planning', {
+    // 訪問計画
+    // query params: year, group
+    name: 'planning',
+    action() {
+        BlazeLayout.render('App_body', { main: 'planning' });
     },
 });
