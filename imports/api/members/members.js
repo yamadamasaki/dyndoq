@@ -24,6 +24,7 @@ const MemberSchema = new SimpleSchema({
     },
     _timestamp: {
         type: SimpleSchema.Integer, // unix time
+        defaultValue: () => new Date().getTime(),
     },
     _description: {
         type: String, // 変更理由など
@@ -47,6 +48,7 @@ const MemberSchema = new SimpleSchema({
     activityTypes: { // 活動名称とその比率% (e.g. { 訪問:35, 移動: 30, ... }), '訪問'は必須
         type: Object,
         optional: true,
+        blackbox: true,
     },
     hoursPerVisiting: { // 訪問当たり時間
         type: Number,
@@ -72,6 +74,7 @@ const MemberSchema = new SimpleSchema({
         // 順序は保存されるか? キーが文字列ならばおおよそ保存されるようだ (Javascript 処理系依存)
         type: Object,
         optional: true,
+        blackbox: true,
     },
     salesGoalOfPropositionSalesPerMonth: { // 提案売上月次目標 (売上)
         type: Number,
@@ -86,7 +89,7 @@ const MemberSchema = new SimpleSchema({
     inChargeOf: { // 担当顧客部署
         type: [String], // DepartmentId
         optional: true,
-    }
+    },
 });
 
 Members.attachSchema(MemberSchema);

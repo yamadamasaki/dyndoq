@@ -24,6 +24,7 @@ const SmapSchema = new SimpleSchema({
     },
     _timestamp: {
         type: SimpleSchema.Integer, // unix time
+        defaultValue: () => new Date().getTime(),
     },
     _description: {
         type: String, // 変更理由など
