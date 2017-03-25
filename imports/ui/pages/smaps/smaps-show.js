@@ -13,11 +13,14 @@ import './smaps-show.html';
 
 Template.smapsShow.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('smaps.all');
-        Meteor.subscribe('smap-colors.all');
-        Meteor.subscribe('customers.all');
-        Meteor.subscribe('products.all');
-        Meteor.subscribe('smaps-detail.all');
+        const u = Meteor.user()
+        if (u) {
+            Meteor.subscribe('smaps.all', u.tenant);
+            Meteor.subscribe('smap-colors.all', u.tenant);
+            Meteor.subscribe('customers.all', u.tenant);
+            Meteor.subscribe('products.all', u.tenant);
+            Meteor.subscribe('smaps-detail.all', u.tenant);
+        }
     });
 });
 

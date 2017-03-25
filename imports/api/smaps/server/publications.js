@@ -3,15 +3,14 @@ import { Smaps } from '../smaps.js';
 import { SmapColors } from '../smap-colors.js';
 import { SmapsDetail } from '../smaps-detail.js';
 
-// 本当は tenant などでフィルタリングすべき
-Meteor.publish('smaps.all', function() {
-    return Smaps.find();
+Meteor.publish('smaps.all', function(tenant) {
+    return Smaps.find({ _tenant: tenant });
 });
 
-Meteor.publish('smap-colors.all', function() {
-    return SmapColors.find();
+Meteor.publish('smap-colors.all', function(tenant) {
+    return SmapColors.find({ _tenant: tenant });
 });
 
-Meteor.publish('smaps-detail.all', function() {
-    return SmapsDetail.find();
+Meteor.publish('smaps-detail.all', function(tenant) {
+    return SmapsDetail.find({ _tenant: tenant });
 });

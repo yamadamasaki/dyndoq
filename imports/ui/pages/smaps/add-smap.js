@@ -11,7 +11,8 @@ import './add-smap.html';
 
 Template.addSmap.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('smaps.all');
+        const u = Meteor.user()
+        if (u) Meteor.subscribe('smaps.all', u.tenant);
     });
 });
 

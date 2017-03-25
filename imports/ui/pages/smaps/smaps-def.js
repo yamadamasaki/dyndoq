@@ -11,8 +11,11 @@ import './smap-modal.js';
 
 Template.smapsDef.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('customers.all');
-        Meteor.subscribe('products.all');
+        const u = Meteor.user()
+        if (u) {
+            Meteor.subscribe('customers.all', u.tenant);
+            Meteor.subscribe('products.all', u.tenant);
+        }
     });
 });
 

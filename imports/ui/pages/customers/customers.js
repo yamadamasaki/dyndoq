@@ -13,8 +13,11 @@ import './sales-customers.js';
 
 Template.customers.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('customers.all');
-        Meteor.subscribe('departments.all');
+        const u = Meteor.user()
+        if (u) {
+            Meteor.subscribe('customers.all', u.tenant);
+            Meteor.subscribe('departments.all', u.tenant);
+        }
     });
 });
 

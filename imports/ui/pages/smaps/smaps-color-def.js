@@ -22,7 +22,8 @@ Template.smapsColorDef.helpers({
 
 Template.smapsColorDef.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('smap-colors.all');
+        const u = Meteor.user()
+        if (u) Meteor.subscribe('smap-colors.all', u.tenant);
     });
 });
 

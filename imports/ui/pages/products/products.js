@@ -11,7 +11,8 @@ import './products-summary.js';
 
 Template.products.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('products.all');
+        const u = Meteor.user()
+        if (u) Meteor.subscribe('products.all', u.tenant);
     });
 });
 

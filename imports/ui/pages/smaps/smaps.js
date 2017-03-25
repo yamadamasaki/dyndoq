@@ -13,7 +13,8 @@ import './smaps-color-def.js';
 
 Template.smaps.onCreated(() => {
     Tracker.autorun(() => {
-        Meteor.subscribe('smaps.all');
+        const u = Meteor.user()
+        if (u) Meteor.subscribe('smaps.all', u.tenant);
     });
 });
 
