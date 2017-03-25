@@ -85,11 +85,35 @@ const registerProducts = (products) => {
     products.forEach(item => { if (!Products.findOne(_.omit(item, '_timestamp'))) Products.insert(item) })
 }
 
-const memberTemplate = (context, email) => _.extend(_.clone(context), { account: accountId(email) })
+const memberContext = _.extend(_.clone(context), {
+    workingHoursPerDay: 9,
+    workingDaysPerMonth: 22,
+    activityTypes: { 訪問: 35, 移動: 30, 企画書作成: 25, 社内会議ほか: 10 },
+    hoursPerVisiting: 0.5,
+    currentCustomerPercentile: 80,
+    mostSignificantCustomerPercentile: 60,
+    significantCustomerPercentile: 30,
+    steps: { アプローチ: 100, ヒアリング: 100, プレゼンテーション: 50, クロージング: 25, 受注: 17 },
+    salesGoalOfPropositionSalesPerMonth: 4800000,
+    grossMarginGoalOfPropositionSalesPerMonth: 1440000,
+})
+
+const departmentId = (customerName, departmentName) => {
+    const customerId = Customers.findOne(_.extend(_.omit(_.clone(context), '_timestamp'), { name: customerName }))._id
+    return Departments.findOne(_.extend(_.omit(_.clone(context), '_timestamp'), { customer: customerId, name: departmentName }))._id
+}
+
+const inChargeOf = (customers) => customers.map(c => departmentId(c[0], c[1]))
+
+const memberTemplate = (context, spec) => {
+    return _.extend(_.clone(context), { account: accountId(spec.email), inChargeOf: inChargeOf(spec.customers) })
+}
 
 const accountId = (email) => Accounts.findUserByEmail(email)._id
 
-const members = (context, emails) => emails.map(email => memberTemplate(context, email))
+const members = (context, specs) => specs.map(spec => {
+    return memberTemplate(context, spec)
+})
 
 const registerMembers = (members) => {
     members.forEach(item => { if (!Members.findOne(_.omit(item, '_timestamp'))) Members.insert(item) })
@@ -104,5 +128,20 @@ export default () => {
         ['福井支社', '顧客A社'],
     ]))
     registerProducts(products(context, ['製品A', '製品B', '製品C']))
-    registerMembers(members(context, ['kawakami-tetsuya@metabolics.co.jp', 'nagashima-shigeo@metabolics.co.jp', 'oh-sadaharu@metabolics.co.jp']))
+    registerMembers(members(memberContext, [
+        { email: 'kawakami-tetsuya@metabolics.co.jp', customers: [] },
+        {
+            email: 'nagashima-shigeo@metabolics.co.jp',
+            customers: [
+                ['顧客A社', '本社']
+            ]
+        },
+        {
+            email: 'oh-sadaharu@metabolics.co.jp',
+            customers: [
+                ['顧客A社', '山梨工場'],
+                ['顧客A社', '福井支社']
+            ]
+        },
+    ]))
 }
