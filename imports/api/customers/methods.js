@@ -42,7 +42,7 @@ export const updateCustomer = new ValidatedMethod({
 })
 
 export const insertDepartment = new ValidatedMethod({
-    name: 'deparments.insert',
+    name: 'departments.insert',
     validate: new SimpleSchema({
         group: { type: String },
         customerId: { type: String },
@@ -87,7 +87,7 @@ export const updateDepartment = new ValidatedMethod({
 })
 
 export const insertPerson = new ValidatedMethod({
-    name: 'deparments.person.insert',
+    name: 'departments.person.insert',
     validate: args => {
         check(args, {
             departmentId: String,
