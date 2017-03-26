@@ -17,26 +17,26 @@ const addTenantToUser = (id, tenant) => {
 
 const accounts = [{
     options: {
-        username: 'testuser',
-        email: 'test@metabolics.co.jp',
+        username: 'testuser1',
+        email: 'test1@metabolics.co.jp',
         password: 'password',
     },
     roles: ['admin'],
     group: 'default-group',
-    tenant: 'tenantA',
+    tenant: 'tenant-a',
 }, {
     options: {
         username: 'testuser2',
         email: 'test2@metabolics.co.jp',
-        password: 'password2',
+        password: 'password',
     },
-    roles: ['member', 'admin'],
+    roles: ['member'],
     group: 'default-group',
-    tenant: 'tenantB',
+    tenant: 'tenant-a',
 }, ];
 
 export default () => {
-    accounts.forEach((item, index, array) => {
+    accounts.forEach((item) => {
         const id = createUserIfNotExists(item.options);
         if (id) {
             Roles.addUsersToRoles(id, item.roles, item.group);
