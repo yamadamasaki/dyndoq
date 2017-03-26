@@ -4,13 +4,13 @@ import { SmapColors } from '../smap-colors.js';
 import { SmapsDetail } from '../smaps-detail.js';
 
 Meteor.publish('smaps.all', function(tenant) {
-    return Smaps.find({ _tenant: tenant });
+    return Smaps.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });
 
 Meteor.publish('smap-colors.all', function(tenant) {
-    return SmapColors.find({ _tenant: tenant });
+    return SmapColors.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });
 
 Meteor.publish('smaps-detail.all', function(tenant) {
-    return SmapsDetail.find({ _tenant: tenant });
+    return SmapsDetail.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });

@@ -3,9 +3,9 @@ import { Customers } from '../customers.js';
 import { Departments } from '../departments.js';
 
 Meteor.publish('customers.all', function(tenant) {
-    return Customers.find({ _tenant: tenant });
+    if (tenant) return Customers.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });
 
 Meteor.publish('departments.all', function(tenant) {
-    return Departments.find({ _tenant: tenant });
+    return Departments.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });
