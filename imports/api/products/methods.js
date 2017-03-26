@@ -1,7 +1,7 @@
-import { Meteor } from 'meteor/meteor';
-import { Products } from './products.js';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Meteor } from 'meteor/meteor'
+import { Products } from './products.js'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
 export const insertProduct = new ValidatedMethod({
     name: 'products.insert',
@@ -19,9 +19,9 @@ export const insertProduct = new ValidatedMethod({
             _timestamp: new Date().getTime(),
             financialYear: parseInt(year),
             name: name,
-        });
+        })
     },
-});
+})
 
 export const updateProduct = new ValidatedMethod({
     name: 'products.update',
@@ -35,6 +35,6 @@ export const updateProduct = new ValidatedMethod({
             $set: {
                 [field]: value,
             }
-        });
+        })
     },
-});
+})

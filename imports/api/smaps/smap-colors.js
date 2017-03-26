@@ -1,7 +1,7 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { Mongo } from 'meteor/mongo'
 
-export const SmapColors = new Mongo.Collection('smap_colors');
+export const SmapColors = new Mongo.Collection('smap_colors')
 
 const SmapColorSchema = new SimpleSchema({
     _id: {
@@ -22,6 +22,6 @@ const SmapColorSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-});
+})
 
-SmapColors.attachSchema(SmapColorSchema);
+SmapColors.attachSchema(SmapColorSchema)

@@ -1,18 +1,18 @@
-import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
-import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
+import { Roles } from 'meteor/alanning:roles'
 
 const createUserIfNotExists = (options) => {
     if ((options.username || options.email) &&
         (!options.username || !Accounts.findUserByUsername(options.username)) &&
         (!options.email || !Accounts.findUserByEmail(options.email))) {
-        return Accounts.createUser(options);
+        return Accounts.createUser(options)
     }
-    return null;
+    return null
 }
 
 const addTenantToUser = (id, tenant) => {
-    Meteor.users.update(id, { $set: { tenant: tenant } });
+    Meteor.users.update(id, { $set: { tenant: tenant } })
 }
 
 const accounts = [{
@@ -33,15 +33,15 @@ const accounts = [{
     roles: ['member'],
     group: 'default-group',
     tenant: 'tenant-a',
-}, ];
+}, ]
 
 export default () => {
     accounts.forEach((item) => {
-        const id = createUserIfNotExists(item.options);
+        const id = createUserIfNotExists(item.options)
         if (id) {
-            Roles.addUsersToRoles(id, item.roles, item.group);
+            Roles.addUsersToRoles(id, item.roles, item.group)
             if (item.tenant) {
-                addTenantToUser(id, item.tenant);
+                addTenantToUser(id, item.tenant)
             }
         }
     })

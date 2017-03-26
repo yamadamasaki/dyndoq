@@ -1,33 +1,33 @@
-import { Template } from 'meteor/templating';
-import { insertCustomer } from '/imports/api/customers/methods.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Meteor } from 'meteor/meteor';
-import { ingroup } from '/imports/api/accounts/utilities.js';
+import { Template } from 'meteor/templating'
+import { insertCustomer } from '/imports/api/customers/methods.js'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { Meteor } from 'meteor/meteor'
+import { ingroup } from '/imports/api/accounts/utilities.js'
 
-import './add-customer.html';
+import './add-customer.html'
 
 Template.addCustomer.onCreated(function() {
-    Meteor.subscribe('user.roles');
-});
+    Meteor.subscribe('user.roles')
+})
 
 Template.addCustomer.events({
     'submit .add-customer' (event) {
-        event.preventDefault();
+        event.preventDefault()
 
-        const target = event.target;
-        const [year, name] = [target.year.value, target.name.value];
-        const group = ingroup(FlowRouter.getQueryParam('group'));
+        const target = event.target
+        const [year, name] = [target.year.value, target.name.value]
+        const group = ingroup(FlowRouter.getQueryParam('group'))
         if (!group) {
-            console.log("illeagal group: ", group);
-            return;
+            console.log("illeagal group: ", group)
+            return
         }
 
         insertCustomer.call({ group, year, name }, (error) => {
             if (error) {
-                console.log('insertCustomer.call', error);
+                console.log('insertCustomer.call', error)
             } else {
-                target.year.value = target.name.value = '';
+                target.year.value = target.name.value = ''
             }
-        });
+        })
     },
-});
+})

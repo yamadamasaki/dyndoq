@@ -1,7 +1,7 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { Mongo } from 'meteor/mongo'
 
-export const Members = new Mongo.Collection('members');
+export const Members = new Mongo.Collection('members')
 
 const MemberSchema = new SimpleSchema({
     _id: {
@@ -90,6 +90,6 @@ const MemberSchema = new SimpleSchema({
         type: [String], // DepartmentId
         optional: true,
     },
-});
+})
 
-Members.attachSchema(MemberSchema);
+Members.attachSchema(MemberSchema)

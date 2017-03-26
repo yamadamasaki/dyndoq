@@ -1,9 +1,9 @@
-import { Meteor } from 'meteor/meteor';
-import { Customers } from './customers.js';
-import { Departments } from './departments.js';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { check, Match } from 'meteor/check';
+import { Meteor } from 'meteor/meteor'
+import { Customers } from './customers.js'
+import { Departments } from './departments.js'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { check, Match } from 'meteor/check'
 
 export const insertCustomer = new ValidatedMethod({
     name: 'customers.insert',
@@ -21,9 +21,9 @@ export const insertCustomer = new ValidatedMethod({
             _timestamp: new Date().getTime(),
             financialYear: parseInt(year),
             name: name,
-        });
+        })
     },
-});
+})
 
 export const updateCustomer = new ValidatedMethod({
     name: 'customers.update',
@@ -37,9 +37,9 @@ export const updateCustomer = new ValidatedMethod({
             $set: {
                 [field]: value,
             }
-        });
+        })
     },
-});
+})
 
 export const insertDepartment = new ValidatedMethod({
     name: 'deparments.insert',
@@ -49,10 +49,10 @@ export const insertDepartment = new ValidatedMethod({
         name: { type: String },
     }).validator(),
     run: ({ group, customerId, name }) => {
-        const customer = Customers.findOne({ _id: customerId }, { fields: { financialYear: 1 } });
+        const customer = Customers.findOne({ _id: customerId }, { fields: { financialYear: 1 } })
         if (!customer) {
-            console.log("insertDepartment: customer does not exists", customerId);
-            return;
+            console.log("insertDepartment: customer does not exists", customerId)
+            return
         }
         return Departments.insert({
             _tenant: Meteor.users.findOne({ _id: Meteor.userId() }, { fields: { 'tenant': 1 } }).tenant,
@@ -63,9 +63,9 @@ export const insertDepartment = new ValidatedMethod({
             financialYear: customer.financialYear,
             customer: customerId,
             name: name,
-        });
+        })
     },
-});
+})
 
 export const updateDepartment = new ValidatedMethod({
     name: 'departments.update',
@@ -75,16 +75,16 @@ export const updateDepartment = new ValidatedMethod({
             departmentId: String,
             field: String,
             value: Match.Any,
-        });
+        })
     },
     run: ({ departmentId, field, value }) => {
         Departments.update({ _id: departmentId }, {
             $set: {
                 [field]: value,
             }
-        });
+        })
     },
-});
+})
 
 export const insertPerson = new ValidatedMethod({
     name: 'deparments.person.insert',
@@ -96,16 +96,16 @@ export const insertPerson = new ValidatedMethod({
                 name: String,
                 familiality: String,
             },
-        });
+        })
     },
     run: ({ departmentId, field, person }) => {
         Departments.update({ _id: departmentId }, {
             $push: {
                 [field]: person
             }
-        });
+        })
     },
-});
+})
 
 export const updatePerson = new ValidatedMethod({
     name: 'departments.person.update',
@@ -116,23 +116,23 @@ export const updatePerson = new ValidatedMethod({
             subfield: String,
             i: Match.Integer,
             value: String,
-        });
+        })
     },
     run: ({ departmentId, field, subfield, i, value }) => {
         const old = Departments.findOne({ _id: departmentId }, {
             fields: {
                 [field]: 1
             }
-        });
+        })
         if (!old) {
-            console.log('updatePerson - missing department: ', departmentId);
-            return;
+            console.log('updatePerson - missing department: ', departmentId)
+            return
         }
-        old[field][i][subfield] = value;
+        old[field][i][subfield] = value
         Departments.update({ _id: departmentId }, {
             $set: {
                 [field]: old[field],
             }
-        });
+        })
     },
-});
+})

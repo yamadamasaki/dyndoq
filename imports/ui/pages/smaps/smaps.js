@@ -1,24 +1,24 @@
-import { Smaps } from '/imports/api/smaps/smaps.js';
-import { check, Match } from 'meteor/check';
-import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
-import { Meteor } from 'meteor/meteor';
+import { Smaps } from '/imports/api/smaps/smaps.js'
+import { check, Match } from 'meteor/check'
+import { Template } from 'meteor/templating'
+import { Tracker } from 'meteor/tracker'
+import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 
-import './smaps.html';
+import './smaps.html'
 
-import './add-smap.js';
-import './smaps-def.js';
-import './smaps-show.js';
-import './smaps-color-def.js';
+import './add-smap.js'
+import './smaps-def.js'
+import './smaps-show.js'
+import './smaps-color-def.js'
 
 Template.smaps.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
         const g = FlowRouter.getQueryParam('group')
-        if (u && g) Meteor.subscribe('smaps.bygroup', u.tenant, g);
-    });
-});
+        if (u && g) Meteor.subscribe('smaps.bygroup', u.tenant, g)
+    })
+})
 
 Template.smaps.helpers({
     yearIndex: () =>
@@ -28,15 +28,15 @@ Template.smaps.helpers({
         .sort((x, y) => y - x)
         .filter((x, i, self) => self.indexOf(x) === i), //unique()
     smapsArg: (year, elementType) => {
-        check(year, Match.Integer);
-        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType, year };
+        check(year, Match.Integer)
+        return { smaps: Smaps.find({ financialYear: year, elementType }), elementType, year }
     },
     smapsAllArg: year => {
-        check(year, Match.Integer);
+        check(year, Match.Integer)
         return {
             customersSmaps: Smaps.find({ financialYear: year, elementType: 'customers' }),
             productsSmaps: Smaps.find({ financialYear: year, elementType: 'products' }),
-        };
+        }
     },
     smapsShowArg: (year, metric) => {
         return {
@@ -55,7 +55,7 @@ Template.smaps.helpers({
             { title: '限界利益額', name: 'marginalProfit', },
             { title: '限界利益率', name: 'marginalProfitRate', },
             { title: '在庫', name: 'stock', },
-        ];
+        ]
     },
     trimAll: string => string.replace(/ /g, ""),
-});
+})

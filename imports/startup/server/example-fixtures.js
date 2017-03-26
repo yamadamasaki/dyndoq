@@ -44,7 +44,7 @@ const registerAccounts = (accounts) => {
         if (!Accounts.findUserByUsername(item.options.username) || !Accounts.findUserByEmail(item.options.email)) {
             const id = Accounts.createUser(item.options)
             if (id) {
-                Roles.addUsersToRoles(id, item.roles, item.group);
+                Roles.addUsersToRoles(id, item.roles, item.group)
                 Meteor.users.update(id, { $set: { tenant: item.tenant } })
             }
         }

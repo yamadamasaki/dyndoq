@@ -1,7 +1,7 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { Mongo } from 'meteor/mongo'
 
-export const Smaps = new Mongo.Collection('smaps');
+export const Smaps = new Mongo.Collection('smaps')
 
 const SmapSchema = new SimpleSchema({
     _id: {
@@ -56,6 +56,6 @@ const SmapSchema = new SimpleSchema({
         type: [String],
         optional: true,
     },
-});
+})
 
-Smaps.attachSchema(SmapSchema);
+Smaps.attachSchema(SmapSchema)

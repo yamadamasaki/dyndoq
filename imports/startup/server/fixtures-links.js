@@ -1,6 +1,6 @@
 // Fill the DB with example data on startup
 
-import { Links } from '../../api/links/links.js';
+import { Links } from '../../api/links/links.js'
 
 export default () => {
     // if the Links collection is empty
@@ -25,8 +25,8 @@ export default () => {
                 url: 'https://forums.meteor.com',
                 createdAt: new Date(),
             },
-        ];
+        ]
 
-        data.forEach(link => Links.insert(link));
+        data.forEach(link => Links.insert(link))
     }
 }
