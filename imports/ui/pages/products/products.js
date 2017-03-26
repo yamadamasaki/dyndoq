@@ -3,6 +3,7 @@ import { Products } from '/imports/api/products/products.js';
 import { check, Match } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './products.html';
 
@@ -12,7 +13,8 @@ import './products-summary.js';
 Template.products.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) Meteor.subscribe('products.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) Meteor.subscribe('products.bygroup', u.tenant, g);
     });
 });
 

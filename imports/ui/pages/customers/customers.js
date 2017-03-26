@@ -4,6 +4,7 @@ import { Departments } from '/imports/api/customers/departments.js';
 import { check, Match } from 'meteor/check';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './customers.html';
 import './add-customer.js';
@@ -14,9 +15,10 @@ import './sales-customers.js';
 Template.customers.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) {
-            Meteor.subscribe('customers.all', u.tenant);
-            Meteor.subscribe('departments.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) {
+            Meteor.subscribe('customers.bygroup', u.tenant, g);
+            Meteor.subscribe('departments.bygroup', u.tenant, g);
         }
     });
 });

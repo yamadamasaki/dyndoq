@@ -3,6 +3,7 @@ import { check, Match } from 'meteor/check';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './smaps.html';
 
@@ -14,7 +15,8 @@ import './smaps-color-def.js';
 Template.smaps.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) Meteor.subscribe('smaps.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) Meteor.subscribe('smaps.bygroup', u.tenant, g);
     });
 });
 

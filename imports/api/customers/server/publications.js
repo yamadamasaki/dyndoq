@@ -6,6 +6,14 @@ Meteor.publish('customers.all', function(tenant) {
     if (tenant) return Customers.find({ _tenant: tenant, _service: 'sales-reinforcement' });
 });
 
+Meteor.publish('customers.bygroup', function(tenant, group) {
+    if (tenant && group) return Customers.find({ _tenant: tenant, _service: 'sales-reinforcement', _group: group });
+});
+
 Meteor.publish('departments.all', function(tenant) {
-    return Departments.find({ _tenant: tenant, _service: 'sales-reinforcement' });
+    if (tenant) return Departments.find({ _tenant: tenant, _service: 'sales-reinforcement' });
+});
+
+Meteor.publish('departments.bygroup', function(tenant, group) {
+    if (tenant && group) return Departments.find({ _tenant: tenant, _service: 'sales-reinforcement', _group: group });
 });

@@ -12,7 +12,8 @@ import './add-smap.html';
 Template.addSmap.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) Meteor.subscribe('smaps.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) Meteor.subscribe('smaps.bygroup', u.tenant, g);
     });
 });
 

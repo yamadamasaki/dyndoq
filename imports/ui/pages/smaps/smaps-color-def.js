@@ -4,6 +4,7 @@ import { upsertSmapColor } from '/imports/api/smaps/methods.js';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 import { SmapColors } from '/imports/api/smaps/smap-colors.js';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './smaps-color-def.html';
 
@@ -23,7 +24,8 @@ Template.smapsColorDef.helpers({
 Template.smapsColorDef.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) Meteor.subscribe('smap-colors.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) Meteor.subscribe('smap-colors.bygroup', u.tenant, g);
     });
 });
 

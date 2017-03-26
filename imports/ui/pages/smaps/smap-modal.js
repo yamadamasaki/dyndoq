@@ -5,13 +5,15 @@ import { Smaps } from '/imports/api/smaps/smaps.js';
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 import { addToSmap } from '/imports/api/smaps/methods.js';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './smap-modal.html';
 
 Template.smapModal.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) Meteor.subscribe('smaps.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) Meteor.subscribe('smaps.bygroup', u.tenant, g);
     });
 });
 

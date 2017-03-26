@@ -8,18 +8,20 @@ import { Customers } from '/imports/api/customers/customers.js';
 import { Products } from '/imports/api/products/products.js';
 import { check } from 'meteor/check';
 import { upsertSmapsDetail } from '/imports/api/smaps/methods.js';
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import './smaps-show.html';
 
 Template.smapsShow.onCreated(() => {
     Tracker.autorun(() => {
         const u = Meteor.user()
-        if (u) {
-            Meteor.subscribe('smaps.all', u.tenant);
-            Meteor.subscribe('smap-colors.all', u.tenant);
-            Meteor.subscribe('customers.all', u.tenant);
-            Meteor.subscribe('products.all', u.tenant);
-            Meteor.subscribe('smaps-detail.all', u.tenant);
+        const g = FlowRouter.getQueryParam('group')
+        if (u && g) {
+            Meteor.subscribe('smaps.bygroup', u.tenant, g);
+            Meteor.subscribe('smap-colors.bygroup', u.tenant, g);
+            Meteor.subscribe('customers.bygroup', u.tenant, g);
+            Meteor.subscribe('products.bygroup', u.tenant, g);
+            Meteor.subscribe('smaps-detail.bygroup', u.tenant, g);
         }
     });
 });
