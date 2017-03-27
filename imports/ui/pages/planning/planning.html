@@ -1,4 +1,47 @@
 <template name="planning">
+    <div class="row">
+        <div class="col-md-2">
+            {{#each month in months}}
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">{{month}} 月</div>
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-md-10">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        {{#each step in steps}}
+                        <th>
+                            {{step}}
+                        </th>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each customer in customers}}
+                    <tr>
+                        <th>{{cname customer}}/{{dname customer}}</th>
+                        {{#each step in steps}}
+                        <td>ここにドロップ</td>
+                        {{/each}}
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
     <div class='examples'>
     <div class='parent'>
         <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer? Great stuff.</label>
