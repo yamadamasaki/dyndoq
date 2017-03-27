@@ -1,11 +1,11 @@
-import { Members } from '../../api/members/members.js';
-import { Meteor } from 'meteor/meteor';
-import { Departments } from '../../api/customers/departments.js';
+import { Members } from '../../api/members/members.js'
+import { Meteor } from 'meteor/meteor'
+import { Departments } from '../../api/customers/departments.js'
 
 export default () => {
     // if the Members collection is empty
     if (Members.find().count() === 0) {
-        const account = Meteor.users.findOne({});
+        const account = Meteor.users.findOne({})
         Members.insert({
             _tenant: 'tenant-a',
             _service: 'sales-reinforcement',
@@ -23,6 +23,6 @@ export default () => {
             salesGoalOfPropositionSalesPerMonth: 4800000,
             grossMarginGoalOfPropositionSalesPerMonth: 1440000,
             inChargeOf: Departments.find({ _tenant: account._tenant }).fetch().map(x => x.name),
-        });
+        })
     }
 }
