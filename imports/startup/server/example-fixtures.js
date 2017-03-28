@@ -69,9 +69,9 @@ const registerCustomers = (customers) => {
 
 const customerId = (name) => Customers.findOne({ name })._id
 
-const deparmentTemplate = (context, name, customerName) => _.extend(_.clone(context), { name, customer: customerId(customerName) })
+const deparmentTemplate = (context, name, customerName, grade) => _.extend(_.clone(context), { name, customer: customerId(customerName), grade })
 
-const departments = (context, items) => items.map(item => deparmentTemplate(context, item[0], item[1]))
+const departments = (context, items) => items.map(item => deparmentTemplate(context, item[0], item[1], item[2]))
 
 const registerDepartments = (departments) => {
     departments.forEach(item => { if (!Departments.findOne(_.omit(item, '_timestamp'))) Departments.insert(item) })
@@ -133,9 +133,9 @@ export default () => {
     registerAccounts(accounts)
     registerCustomers(customers(context, ['顧客A社', '顧客B社', '顧客C社']))
     registerDepartments(departments(context, [
-        ['本社', '顧客A社'],
-        ['山梨工場', '顧客A社'],
-        ['福井支社', '顧客A社'],
+        ['本社', '顧客A社', '最重要', ],
+        ['山梨工場', '顧客A社', '最重要', ],
+        ['福井支社', '顧客A社', '重要', ],
     ]))
     registerProducts(products(context, ['製品A', '製品B', '製品C']))
     registerMembers(members(memberContext, [

@@ -104,6 +104,10 @@ const DepartmentSchema = new SimpleSchema({
     // 提案粗利率 -- 分子 = 提案粗利額?  分母 = 提案売上金額 or 提案時の想定売上額の和?
     // 提案粗利額 -- 提案売上粗利/提案件数? 提案時の想定売上粗利の和? 提案時の想定売上粗利の和/提案件数 (=提案後との平均) ?
     */
+    grade: { // 最重要/重要/その他/新規
+        type: String,
+        optional: true,
+    },
 })
 
 Departments.attachSchema(DepartmentSchema)
