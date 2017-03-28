@@ -19,10 +19,15 @@ export default () => {
             currentCustomerPercentile: 80,
             mostSignificantCustomerPercentile: 60,
             significantCustomerPercentile: 30,
-            steps: { アプローチ: 100, ヒアリング: 100, プレゼンテーション: 50, クロージング: 25, 受注: 17 },
+            steps: {
+                アプローチ: { conversionRatio: 100, standardVisitFrequency: 1, },
+                ヒアリング: { conversionRatio: 100, standardVisitFrequency: 2, },
+                プレゼンテーション: { conversionRatio: 50, standardVisitFrequency: 4, },
+                クロージング: { conversionRatio: 25, standardVisitFrequency: 2 },
+                受注: { conversionRatio: 17, standardVisitFrequency: 0, },
+            },
             salesGoalOfPropositionSalesPerMonth: 4800000,
             grossMarginGoalOfPropositionSalesPerMonth: 1440000,
-            inChargeOf: Departments.find({ _tenant: account._tenant }).fetch().map(x => x.name),
         })
     }
 }

@@ -93,7 +93,13 @@ const memberContext = _.extend(_.clone(context), {
     currentCustomerPercentile: 80,
     mostSignificantCustomerPercentile: 60,
     significantCustomerPercentile: 30,
-    steps: { アプローチ: 100, ヒアリング: 100, プレゼンテーション: 50, クロージング: 25, 受注: 17 },
+    steps: {
+        アプローチ: { conversionRatio: 100, standardVisitFrequency: 1, },
+        ヒアリング: { conversionRatio: 100, standardVisitFrequency: 2, },
+        プレゼンテーション: { conversionRatio: 50, standardVisitFrequency: 4, },
+        クロージング: { conversionRatio: 25, standardVisitFrequency: 2 },
+        受注: { conversionRatio: 17, standardVisitFrequency: 0, },
+    },
     salesGoalOfPropositionSalesPerMonth: 4800000,
     grossMarginGoalOfPropositionSalesPerMonth: 1440000,
 })
@@ -103,10 +109,14 @@ const departmentId = (customerName, departmentName) => {
     return Departments.findOne(_.extend(_.omit(_.clone(context), '_timestamp'), { customer: customerId, name: departmentName }))._id
 }
 
-const inChargeOf = (customers) => customers.map(c => departmentId(c[0], c[1]))
+const inChargeOf = (customers) => customers ?
+    customers.map(c => departmentId(c[0], c[1])) : []
 
 const memberTemplate = (context, spec) => {
-    return _.extend(_.clone(context), { account: accountId(spec.email), inChargeOf: inChargeOf(spec.customers) })
+    return _.extend(_.clone(context), {
+        account: accountId(spec.email),
+        inChargeOf: inChargeOf(spec.inChargeOf),
+    })
 }
 
 const accountId = (email) => Accounts.findUserByEmail(email)._id
@@ -132,16 +142,16 @@ export default () => {
         { email: 'kawakami-tetsuya@metabolics.co.jp', customers: [] },
         {
             email: 'nagashima-shigeo@metabolics.co.jp',
-            customers: [
+            inChargeOf: [
                 ['顧客A社', '本社']
-            ]
+            ],
         },
         {
             email: 'oh-sadaharu@metabolics.co.jp',
-            customers: [
+            inChargeOf: [
                 ['顧客A社', '山梨工場'],
                 ['顧客A社', '福井支社']
-            ]
+            ],
         },
     ]))
 }

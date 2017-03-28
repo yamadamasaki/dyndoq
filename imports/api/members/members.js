@@ -56,34 +56,29 @@ const MemberSchema = new SimpleSchema({
         optional: true,
     },
     currentCustomerPercentile: { // 既存顧客比率 (対新規顧客)
-        type: Number,
-        decimal: true,
+        type: SimpleSchema.Integer,
         optional: true,
     },
     mostSignificantCustomerPercentile: { // 最重要顧客比率 (既存顧客中)
-        type: Number,
-        decimal: true,
+        type: SimpleSchema.Integer,
         optional: true,
     },
     significantCustomerPercentile: { // 重要顧客比率 (既存顧客中)
-        type: Number,
-        decimal: true,
+        type: SimpleSchema.Integer,
         optional: true,
     },
-    steps: { // ステップ名称と前のステップからの転換率 (e.g. { アプローチ: 100, ..., 受注: 17}), '受注'は必須
+    steps: { // ステップ名称と前のステップからの転換率 (e.g. { アプローチ: { conversionRatio: 100, standardVisitFrequency:1, }, ..., 受注: 17}), '受注'は必須
         // 順序は保存されるか? キーが文字列ならばおおよそ保存されるようだ (Javascript 処理系依存)
         type: Object,
         optional: true,
         blackbox: true,
     },
     salesGoalOfPropositionSalesPerMonth: { // 提案売上月次目標 (売上)
-        type: Number,
-        decimal: true,
+        type: SimpleSchema.Integer,
         optional: true,
     },
     grossMarginGoalOfPropositionSalesPerMonth: { // 提案売上月次目標 (粗利額)
-        type: Number,
-        decimal: true,
+        type: SimpleSchema.Integer,
         optional: true,
     },
     inChargeOf: { // 担当顧客部署
