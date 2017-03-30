@@ -1,60 +1,83 @@
 <template name="planning">
-    <div class="row">
-        <div class="col-md-2">
-            {{#each month in months}}
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">{{month}} 月</div>
-                <!-- List group -->
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{financialYear}} 年度 {{memberName}} さんの訪問計画</h1>
             </div>
-            {{/each}}
         </div>
-        <div class="col-md-10">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        {{#each step in steps}}
-                        <th>
-                            {{step}}
-                        </th>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <blockquote>
+                        <p>このドキュメントは, 1年間の営業訪問計画です.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        {{> fillVisits (fillVisitsArgs)}}
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-2">
+                {{#each month in months}}
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">{{month}} 月</div>
+                    <!-- List group -->
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+            <div class="col-md-10">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            {{#each step in steps}}
+                            <th>
+                                {{step}}
+                            </th>
+                            {{/each}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each customer in customers}}
+                        <tr>
+                            <th>{{cname customer}}/{{dname customer}}</th>
+                            {{#each step in steps}}
+                            <td>ここにドロップ</td>
+                            {{/each}}
+                        </tr>
                         {{/each}}
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each customer in customers}}
-                    <tr>
-                        <th>{{cname customer}}/{{dname customer}}</th>
-                        {{#each step in steps}}
-                        <td>ここにドロップ</td>
-                        {{/each}}
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     
     <div class='examples'>
-    <div class='parent'>
-        <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer? Great stuff.</label>
-        <div class='wrapper'>
-        <div id='left1' class='container'>
-            {{#each items}}
-            <div>{{name}}</div>
-            {{/each}}
+        <div class='parent'>
+            <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer? Great stuff.</label>
+            <div class='wrapper'>
+                <div id='left1' class='container'>
+                    {{#each items}}
+                    <div>{{name}}</div>
+                    {{/each}}
+                </div>
+                <div id='right1' class='container'>
+                    <div>hello</div>
+                </div>
+            </div>
         </div>
-        <div id='right1' class='container'>
-            <div>hello</div>
-        </div>
-        </div>
-    </div>
     </div>
 </template>

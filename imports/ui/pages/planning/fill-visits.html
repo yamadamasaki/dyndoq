@@ -1,0 +1,28 @@
+<template name="fillVisits">
+    <ul>
+        <li>訪問カード一式を新たに作りますか?<br>
+            <p>既に訪問カードを作っている場合には, 仮に割当てが終わっていたとしても<mark>削除</mark>されてしまいますので, 注意してください</p>
+        </li>
+        <ul>
+            <li>
+                <form class="fill-visits form-inline">
+                    <div class="form-group">
+                        <input type="text" name="year" placeholder="年度" class="form-control" id="year" value={{year}} disabled>
+                        <label for="year">年度の</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="memberName" placeholder="メンバ名" class="form-control" id="memberName" value={{memberName}} disabled>
+                        <label for="memberName">さんの</label>
+                    </div>
+                    <input type="hidden" id="memberId" value="{{memberId}}">
+                    <div class="form-group">
+                    <label>訪問カード一式を新たに</label>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" name="submit" class="btn btn-default">作る</button> !
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </ul>
+</template>
