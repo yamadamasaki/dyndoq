@@ -77,20 +77,13 @@ const getVisitsNumbers = (m) => {
     const VPMByStep = (n, step) => n * step.conversionRatio / 100 * step.standardVisitFrequency
 
     // グレードごとの全ステップ訪問数
+    const gradeToVPMMap = {
+        最重要: () => m.mostSignificantCustomerPercentile || 0,
+        重要: () => m.significantCustomerPercentile || 0,
+        その他: () => 100 - (m.mostSignificantCustomerPercentile || 0) - (m.significantCustomerPercentile || 0),
+    }
     const VPMByGrade = (grade) => {
-        let v = 0
-        switch (grade) {
-            case '最重要':
-                v = m.mostSignificantCustomerPercentile || 0
-                break;
-            case '重要':
-                v = m.significantCustomerPercentile || 0
-                break;
-            case 'その他':
-                v = 100 - (m.mostSignificantCustomerPercentile || 0) - (m.significantCustomerPercentile || 0)
-                break;
-        }
-        return v / 100 * m.currentCustomerPercentile / 100 * nVPM
+        return gradeToVPMMap[grade]() / 100 * m.currentCustomerPercentile / 100 * nVPM
     }
 
     // 正規化係数
