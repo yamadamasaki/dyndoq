@@ -76,8 +76,16 @@ const VisitSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
+    assignedStep: { // 本来割り当てられたアプローチ
+        type: String,
+        optional: true,
+    },
     month: { // 月次
         type: SimpleSchema.Integer,
+        optional: true,
+    },
+    customerGrade: { // 顧客区分
+        type: String,
         optional: true,
     },
     department: { // Department Id
