@@ -5,6 +5,7 @@ import { Customers } from '/imports/api/customers/customers.js'
 import { Departments } from '/imports/api/customers/departments.js'
 import { Tracker } from 'meteor/tracker'
 import { Meteor } from 'meteor/meteor'
+import { Visits } from '/imports/api/visits/visits.js'
 
 import './fill-visits.js'
 
@@ -22,6 +23,7 @@ Template.planning.onCreated(() => {
             Meteor.subscribe('members.bygroup', u.tenant, groupName)
             Meteor.subscribe('customers.bygroup', u.tenant, groupName)
             Meteor.subscribe('departments.bygroup', u.tenant, groupName)
+            Meteor.subscribe('visits.bygroup', u.tenant, groupName)
         }
     })
 })
@@ -42,6 +44,7 @@ Template.planning.helpers({
     memberId: () => memberId,
     memberName,
     fillVisitsArgs: () => { return { year, memberName, memberId } },
+    visits: month => Visits.find({ member: memberId, financialYear: year, month, $or: [{ plannedDate: { $exists: false } }, { plannedDate: { $eq: null } }] }),
 })
 
 Template.planning.onRendered(function() {

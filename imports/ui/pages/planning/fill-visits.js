@@ -47,7 +47,7 @@ Template.fillVisits.events({
                 _.toPairs(steps).forEach(step => { // ステップごとに
                     const [stepName, n] = step
                     _.times(n, () => { // n 回の
-                        insertVisit.call({ group, year, member, month: month + 1, stepName, grade }, (error) => {
+                        insertVisit.call({ group, year: parseInt(year), member, month: month + 1, stepName, grade }, (error) => {
                             if (error) {
                                 console.log("insertVisit.call", error)
                             }
