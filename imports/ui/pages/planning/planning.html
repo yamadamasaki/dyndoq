@@ -28,9 +28,9 @@
                     <!-- Default panel contents -->
                     <div class="panel-heading">{{month}} 月</div>
                     <!-- List group -->
-                    <ul class="list-group">
-                        {{#each visit in (visits month)}}
-                        <li class="list-group-item">{{visit.customerGrade}}/{{visit.step}}</li>
+                    <ul class="list-group foo" id="visit-{{month}}">
+                        {{#each visit in (visitsGroup month)}}
+                            <li class="list-group-item">{{visit.grade}}/{{visit.step}} ({{visit.n}})</li>
                         {{/each}}
                     </ul>
                 </div>
@@ -50,31 +50,22 @@
                     </thead>
                     <tbody>
                         {{#each customer in customers}}
+                        <div id="3P7CrqNrcYxBeG"></div>
                         <tr>
                             <th>{{cname customer}}/{{dname customer}}</th>
                             {{#each step in steps}}
-                            <td>ここにドロップ</td>
+                            <td>
+                            <ul class="list-group foo" id="visit-{{customer}}-{{step}}">
+                                {{#each visit in (visits customer step)}}
+                                <li class="list-group-item">{{visit.plannedDate}}</li>
+                                {{/each}}
+                            </ul>
+                            </td>
                             {{/each}}
                         </tr>
                         {{/each}}
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    
-    <div class='examples'>
-        <div class='parent'>
-            <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer? Great stuff.</label>
-            <div class='wrapper'>
-                <div id='left1' class='container'>
-                    {{#each items}}
-                    <div>{{name}}</div>
-                    {{/each}}
-                </div>
-                <div id='right1' class='container'>
-                    <div>hello</div>
-                </div>
             </div>
         </div>
     </div>
