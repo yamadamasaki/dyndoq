@@ -5,6 +5,10 @@ import { Customers } from '/imports/api/customers/customers.js'
 import { Departments } from '/imports/api/customers/departments.js'
 import { Products } from '/imports/api/products/products.js'
 import { Members } from '/imports/api/members/members.js'
+import { Visits } from '/imports/api/visits/visits.js'
+import { Smaps } from '/imports/api/smaps/smaps.js'
+import { SmapColors } from '/imports/api/smaps/smap-colors.js'
+import { SmapsDetail } from '/imports/api/smaps/smaps-detail.js'
 import { _ } from 'meteor/underscore'
 
 const accounts = [{
@@ -64,6 +68,8 @@ const customerTemplate = (context, name) => _.extend(_.clone(context), { name })
 const customers = (context, names) => names.map(name => customerTemplate(context, name))
 
 const registerCustomers = (customers) => {
+    Customers.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Customers.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
     customers.forEach(item => { if (!Customers.findOne(_.omit(item, '_timestamp'))) Customers.insert(item) })
 }
 
@@ -74,6 +80,9 @@ const deparmentTemplate = (context, name, customerName, grade) => _.extend(_.clo
 const departments = (context, items) => items.map(item => deparmentTemplate(context, item[0], item[1], item[2]))
 
 const registerDepartments = (departments) => {
+    Departments.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Departments.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
+    Departments.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1, customer: 1 })
     departments.forEach(item => { if (!Departments.findOne(_.omit(item, '_timestamp'))) Departments.insert(item) })
 }
 
@@ -82,6 +91,8 @@ const productTemplate = (context, name) => _.extend(_.clone(context), { name })
 const products = (context, names) => names.map(name => productTemplate(context, name))
 
 const registerProducts = (products) => {
+    Products.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Products.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
     products.forEach(item => { if (!Products.findOne(_.omit(item, '_timestamp'))) Products.insert(item) })
 }
 
@@ -126,7 +137,24 @@ const members = (context, specs) => specs.map(spec => {
 })
 
 const registerMembers = (members) => {
+    Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
+    Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1, account: 1 })
     members.forEach(item => { if (!Members.findOne(_.omit(item, '_timestamp'))) Members.insert(item) })
+}
+
+const indexVisits = () => {
+    Visits.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Visits.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
+    Visits.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1, member: 1 })
+    Visits.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1, member: 1, plannedDate: 1 })
+}
+
+const indexSmaps = () => {
+    Smaps.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
+    Smaps.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
+    SmapsDetail.rawCollection().createIndex({ customerId: 1, productId: 1 })
+    SmapColors.rawCollection().createIndex({ customerId: 1, productId: 1 })
 }
 
 export default () => {
@@ -154,4 +182,6 @@ export default () => {
             ],
         },
     ]))
+    indexVisits()
+    indexSmaps()
 }
