@@ -15,7 +15,7 @@ export const removeVisits = new ValidatedMethod({
             _tenant: (Meteor.user() || {}).tenant,
             _service: 'sales-reinforcement',
             _group: group,
-            financialYear: year,
+            financialYear: parseInt(year),
             member,
         })
     },

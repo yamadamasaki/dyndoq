@@ -32,31 +32,32 @@ Template.fillVisits.events({
                 console.log('removeVisits.call', error)
                 Bert.alert('訪問を削除できませんでした', 'danger', 'growl-top-right')
             } else {
-                Bert.alert('訪問を削除しました', 'success', 'growl-top-right')
-            }
-        })
+                Bert.alert('訪問をいったん削除しました', 'success', 'growl-top-right')
+                const m = Members.findOne(member)
+                if (!m) return
 
-        const m = Members.findOne(member)
-        if (!m) return
+                const visitsNumbers = getVisitsNumbers(m)
 
-        const visitsNumbers = getVisitsNumbers(m)
-
-        _.toPairs(visitsNumbers).forEach(it => { // 顧客区分ごとに
-            const [grade, steps] = it
-            _.times(12, (month) => { // 毎月
-                _.toPairs(steps).forEach(step => { // ステップごとに
-                    const [stepName, n] = step
-                    _.times(n, () => { // n 回の
-                        insertVisit.call({ group, year: parseInt(year), member, month: month + 1, stepName, grade }, (error) => {
-                            if (error) {
-                                console.log("insertVisit.call", error)
-                            }
+                _.toPairs(visitsNumbers).forEach(it => { // 顧客区分ごとに
+                    const [grade, steps] = it
+                    _.times(12, (month) => { // 毎月
+                        _.toPairs(steps).forEach(step => { // ステップごとに
+                            const [stepName, n] = step
+                            _.times(n, () => { // n 回の
+                                insertVisit.call({ group, year: parseInt(year), member, month: month + 1, stepName, grade }, (error) => {
+                                    if (error) {
+                                        console.log("insertVisit.call", error)
+                                        Bert.alert('訪問を追加できませんでした', 'danger', 'growl-top-right')
+                                    } else {
+                                        Bert.alert('訪問を削除して, 追加し直しました', 'success', 'growl-top-right')
+                                    }
+                                })
+                            })
                         })
                     })
                 })
-            })
+            }
         })
-        Bert.alert('訪問を追加しました', 'success', 'growl-top-right')
     },
 })
 
