@@ -17,25 +17,6 @@ const _ = lodash
 
 let groupName, memberId, year
 
-const registerDrake = (steps, customers) => {
-    if (!steps || !customers) return
-    const srcs = _.range(12).map(it => {
-        return document.getElementById(`visit-${it+1}`)
-    })
-    const dests = _.flatten(customers.map(customer => {
-        return steps.map(step => {
-            console.log("registerDrake: ", document.getElementById(`visit-${customer}-${step}`))
-            return document.getElementById(`visit-${customer}-${step}`)
-        })
-    }))
-    console.log("3P7CrqNrcYxBeG: ", document.getElementById('3P7CrqNrcYxBeG'))
-    const drake = dragula()
-    srcs.forEach(it => drake.containers.push(it))
-    dests.forEach(it => drake.containers.push(it))
-    console.log("drake: ", drake.containers)
-    return drake
-}
-
 Template.planning.onCreated(() => {
     groupName = FlowRouter.getParam('group')
     memberId = FlowRouter.getParam('member')
@@ -49,14 +30,6 @@ Template.planning.onCreated(() => {
             Meteor.subscribe('departments.bygroup', u.tenant, groupName)
             Meteor.subscribe('visits.bygroup', u.tenant, groupName)
         }
-    })
-})
-
-Template.planning.onRendered(function() {
-    Template.instance().autorun(() => {
-        console.log("autorun onRendered")
-        const drake = registerDrake(steps(), customers())
-        console.log("autorun: ", drake)
     })
 })
 
