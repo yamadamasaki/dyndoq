@@ -10,6 +10,7 @@ import { lodash } from 'meteor/erasaur:meteor-lodash'
 import { $ } from 'meteor/jquery'
 
 import './fill-visits.js'
+import './set-visit.js'
 
 import './planning.html'
 

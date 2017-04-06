@@ -30,7 +30,12 @@
                     <!-- List group -->
                     <ul class="list-group foo" id="visit-{{month}}">
                         {{#each visit in (visitsGroup month)}}
-                            <li class="list-group-item">{{visit.grade}}/{{visit.step}} ({{visit.n}})</li>
+                            <li class="list-group-item">
+                                <a data-toggle="modal" data-target="#setVisitModal-{{visit.grade}}-{{visit.step}}-{{month}}">
+                                    {{visit.grade}}/{{visit.step}} ({{visit.n}})
+                                </a>
+                                {{> setVisit visit=visit month=month}}
+                            </li>
                         {{/each}}
                     </ul>
                 </div>
