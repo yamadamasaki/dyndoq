@@ -24,7 +24,7 @@ Template.personsModal.events({
             person: { name: "", familiality: "" },
         }, (error) => {
             if (error) {
-                console.log('addPersonToDepartment.call', error)
+                console.log('insertPerson.call', error)
             }
         })
     },
@@ -48,7 +48,7 @@ Template.personsModal.events({
             i: parseInt(i),
         }, (error) => {
             if (error) {
-                console.log('addPersonToDepartment.call', error)
+                console.log('updatePerson.call', error)
             }
         })
     },
