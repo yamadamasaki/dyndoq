@@ -47,3 +47,13 @@ export const insertVisit = new ValidatedMethod({
         })
     },
 })
+
+export const toAppeared = new ValidatedMethod({
+    name: 'visit.toAppeared',
+    validate: new SimpleSchema({
+        _id: { type: String },
+        plannedDate: { type: Date },
+        department: { type: String },
+    }).validator(),
+    run: ({ _id, plannedDate, department }) => Visits.update(_id, { $set: { plannedDate, department } }),
+})

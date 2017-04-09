@@ -1,20 +1,32 @@
 <template name="setVisit">
 <!-- Modal -->
-<div class="modal fade" id="setVisitModal-{{visit.grade}}-{{visit.step}}-{{month}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="setVisitModal-{{month}}-{{visit.grade}}-{{visit.step}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">訪問先を決めます ({{visit.grade}}/{{visit.step}})</h4>
             </div>
             <div class="modal-body">
-            {{visit.grade}}
-            {{visit.step}}
-            {{month}}
+                <form>
+                    <div class="form-group">
+                        <label for="customerSelector-{{month}}-{{visit.grade}}-{{visit.step}}">顧客</label>
+                        <select class="form-control" id="customerSelector-{{month}}-{{visit.grade}}-{{visit.step}}">
+                            <option></option>
+                            {{#each customer in (customers visit.grade)}}
+                            <option value="{{customer.id}}">{{customer.cname}}/{{customer.dname}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datePicker-{{month}}-{{visit.grade}}-{{visit.step}}">予定日</label>
+                        <input type="text" class="form-control" id="datePicker-{{month}}-{{visit.grade}}-{{visit.step}}">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="saveButton-{{month}}-{{visit.grade}}-{{visit.step}}">Save changes</button>
             </div>
         </div>
     </div>
