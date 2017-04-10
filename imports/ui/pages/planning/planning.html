@@ -62,7 +62,7 @@
                             <td>
                             <ul class="list-group foo" id="visit-{{customer}}-{{step}}">
                                 {{#each visit in (visits customer step)}}
-                                <li class="list-group-item">{{visit.plannedDate}}</li>
+                                <li class="list-group-item">{{formatDate visit.plannedDate}}</li>
                                 {{/each}}
                             </ul>
                             </td>

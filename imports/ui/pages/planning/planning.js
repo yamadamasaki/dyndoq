@@ -8,6 +8,7 @@ import { Meteor } from 'meteor/meteor'
 import { Visits } from '/imports/api/visits/visits.js'
 import { lodash } from 'meteor/erasaur:meteor-lodash'
 import { $ } from 'meteor/jquery'
+import { moment } from 'meteor/momentjs:moment'
 
 import './fill-visits.js'
 import './set-visit.js'
@@ -71,4 +72,5 @@ Template.planning.helpers({
         })).filter(it => it.n > 0)
     },
     visits: (customer, step) => Visits.find({ department: customer, step, member: memberId, financialYear: year, }),
+    formatDate: (date) => moment(date).locale('ja').format("M 月 D 日 (ddd)")
 })
