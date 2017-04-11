@@ -73,5 +73,12 @@ Template.planning.helpers({
         })).filter(it => it.n > 0)
     },
     visits: (customer, step) => Visits.find({ department: customer, step, member: memberId, financialYear: year, }),
-    formatDate: (date) => moment(date).locale('ja').format("M 月 D 日 (ddd)")
+    formatDate: (date) => moment(date).locale('ja').format("M 月 D 日 (ddd)"),
+    bgcolor: visit => {
+        const white = '#ffffff'
+        const green = '#33ff99'
+        if (!visit) return white
+        else if (visit.isAppointed) return green
+        else return white
+    }
 })

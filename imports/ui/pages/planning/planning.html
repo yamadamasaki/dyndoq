@@ -62,7 +62,7 @@
                             <td>
                             <ul class="list-group foo" id="visit-{{customer}}-{{step}}">
                                 {{#each visit in (visits customer step)}}
-                                <li class="list-group-item">
+                                <li class="list-group-item" style="background-color:{{bgcolor visit}};">
                                     <a data-toggle="modal" data-target="#planVisitModal-{{visit._id}}">
                                         {{formatDate visit.plannedDate}}
                                     </a>
