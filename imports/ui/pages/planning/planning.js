@@ -12,6 +12,7 @@ import { moment } from 'meteor/momentjs:moment'
 
 import './fill-visits.js'
 import './set-visit.js'
+import './plan-visit.js'
 
 import './planning.html'
 

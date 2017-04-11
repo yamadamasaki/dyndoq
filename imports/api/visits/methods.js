@@ -57,3 +57,13 @@ export const toAppeared = new ValidatedMethod({
     }).validator(),
     run: ({ _id, plannedDate, department }) => Visits.update(_id, { $set: { plannedDate, department } }),
 })
+
+export const toAppointed = new ValidatedMethod({
+    name: 'visit.toAppointed',
+    validate: new SimpleSchema({
+        _id: { type: String },
+        plannedDate: { type: Date },
+        isAppointed: { type: Boolean },
+    }).validator(),
+    run: ({ _id, plannedDate, isAppointed }) => Visits.update(_id, { $set: { plannedDate, isAppointed } }),
+})
