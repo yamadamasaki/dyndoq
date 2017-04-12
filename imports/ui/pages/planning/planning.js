@@ -7,7 +7,6 @@ import { Tracker } from 'meteor/tracker'
 import { Meteor } from 'meteor/meteor'
 import { Visits } from '/imports/api/visits/visits.js'
 import { lodash } from 'meteor/erasaur:meteor-lodash'
-import { $ } from 'meteor/jquery'
 import { moment } from 'meteor/momentjs:moment'
 
 import './fill-visits.js'
