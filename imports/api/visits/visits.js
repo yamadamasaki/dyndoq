@@ -48,27 +48,7 @@ const VisitSchema = new SimpleSchema({
         type: Date,
         optional: true,
     },
-    plannedValue: { // 粗利金額
-        type: Number,
-        optional: true,
-    },
-    actualValue: { // 粗利金額
-        type: Number,
-        optional: true,
-    },
-    goal: { // ゴール#
-        type: Number,
-        optional: true,
-    },
-    todo: { // 活動ゴール
-        type: String,
-        optional: true,
-    },
-    done: { // 活動ゴール
-        type: String,
-        optional: true,
-    },
-    isSuccess: { // ○×
+    isSuccessful: { // ○×
         type: Boolean,
         defaultValue: false,
     },
@@ -90,26 +70,6 @@ const VisitSchema = new SimpleSchema({
     },
     department: { // Department Id
         type: String,
-        optional: true,
-    },
-    attenders: { // 面談者
-        type: [String], // 名前
-        optional: true,
-    },
-    products: { // 製品
-        type: [String], // Product Id
-        optional: true,
-    },
-    issues: { // G100 クレーム, その他対応要事項
-        type: [String],
-        optional: true,
-    },
-    informations: { // 収集情報
-        type: [String],
-        optional: true,
-    },
-    hypotheses: { // 仮説
-        type: [String],
         optional: true,
     },
 })
