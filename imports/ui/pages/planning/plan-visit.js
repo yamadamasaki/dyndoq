@@ -18,9 +18,6 @@ Template.planVisit.onCreated(() => {
         console.log("autorun onCreated")
         const u = Meteor.user()
         if (u && groupName) {
-            Meteor.subscribe('members.bygroup', u.tenant, groupName)
-            Meteor.subscribe('customers.bygroup', u.tenant, groupName)
-            Meteor.subscribe('departments.bygroup', u.tenant, groupName)
             Meteor.subscribe('visits.bygroup', u.tenant, groupName)
         }
     })
