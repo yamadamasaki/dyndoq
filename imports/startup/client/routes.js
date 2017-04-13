@@ -60,7 +60,7 @@ FlowRouter.route('/planning/:year/:group/:member', {
     },
 })
 
-FlowRouter.route('/visitnote/:visitid/:mode', {
+FlowRouter.route('/visitnote/:id/:mode', {
     // 訪問ノート
     name: 'visitnote',
     action() {

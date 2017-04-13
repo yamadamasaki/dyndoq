@@ -1,10 +1,12 @@
 import { Template } from 'meteor/templating'
 import { Visits } from '/imports/api/visits/visits.js'
+import { Visitnotes } from '/imports/api/visitnotes/visitnotes.js'
 import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Tracker } from 'meteor/tracker'
 import { moment } from 'meteor/momentjs:moment'
 import { toAppointed } from '/imports/api/visits/methods.js'
+import { insertVisitnote } from '/imports/api/visitnotes/methods.js'
 
 import './plan-visit.html'
 
@@ -19,6 +21,7 @@ Template.planVisit.onCreated(() => {
         const u = Meteor.user()
         if (u && groupName) {
             Meteor.subscribe('visits.bygroup', u.tenant, groupName)
+            Meteor.subscribe('visitnotes.bygroup', u.tenant, groupName)
         }
     })
 })
@@ -42,5 +45,21 @@ Template.planVisit.events({
                 console.log('toAppointed.call', error)
             }
         })
+    },
+    'click .prenote-button' (event) {
+        event.preventDefault()
+
+        const [x, visitId] = event.target.id.split('-')
+        const visit = Visits.findOne(visitId)
+        if (!visit) return
+        let visitnote = (Visitnotes.findOne({ visit: visitId }) || {})._id
+        if (!visitnote) {
+            visitnote = insertVisitnote.call({ visit: visitId, year: visit.financialYear, group: visit._group }, error => {
+                if (error) {
+                    console.log('insertVisitnote.call', error)
+                }
+            })
+        }
+        window.open(`${window.location.protocol}//${window.location.host}/visitnote/${visitnote}/pre`, '_blank')
     }
 })
