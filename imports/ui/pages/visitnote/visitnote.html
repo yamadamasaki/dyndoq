@@ -1,4 +1,36 @@
 <template name="visitnote">
-    <h1>訪問ノート</h1>
-    <h2>{{customerName visit.department}}/{{departmentName visit.department}}</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{date}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <blockquote>
+                    <p>ここでは訪問ごとに, 予習 (仮説/予想/計画立案) と復習 (検証/実績/まとめ) を行います</p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{customerName visit.department}}/{{departmentName visit.department}} 訪問ノート</h2>
+            </div>
+        </div>
+        {{#if pre}}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>予習</h3>
+            </div>
+        </div>
+        {{/if}}
+        
+        {{#if post}}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>復習</h3>
+            </div>
+        </div>
+        {{/if}}
+    </div>
 </template>

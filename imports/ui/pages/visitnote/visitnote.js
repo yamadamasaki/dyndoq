@@ -6,6 +6,7 @@ import { Visits } from '/imports/api/visits/visits.js'
 import { Customers } from '/imports/api/customers/customers.js'
 import { Departments } from '/imports/api/customers/departments.js'
 import { Visitnotes } from '/imports/api/visitnotes/visitnotes.js'
+import { moment } from 'meteor/momentjs:moment'
 
 import './visitnote.html'
 
@@ -27,8 +28,19 @@ Template.visitnote.onCreated(() => {
 
 Template.visitnote.helpers({
     mode,
-    visit: () => Visits.findOne(Visitnotes.findOne(id || {}).visit),
+    visit: () => {
+        const n = Visitnotes.findOne(id)
+        return n ? Visits.findOne(n.visit) : null
+    },
     departmentName: id => (Departments.findOne(id) || {}).name,
     customerName: departmentId => (Customers.findOne((Departments.findOne(departmentId) || {}).customer) || {}).name,
-    note: () => Visitnotes.findOne(id)
+    note: () => Visitnotes.findOne(id),
+    date: format => {
+        if (!format) format = "YYYY 年 MM 月 DD 日"
+        const n = Visitnotes.findOne(id)
+        const v = n ? Visits.findOne(n.visit) : null
+        return v ? moment((v.executedDate || v.plannedDate || new Date())).locale('ja').format(format) : ""
+    },
+    pre: () => mode === 'pre' || mode === 'prepost',
+    post: () => mode === 'post' || mode === 'prepost',
 })
