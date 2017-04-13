@@ -9,6 +9,7 @@ import '../../ui/pages/customers/customers.js'
 import '../../ui/pages/products/products.js'
 import '../../ui/pages/smaps/smaps.js'
 import '../../ui/pages/planning/planning.js'
+import '../../ui/pages/visitnote/visitnote.js'
 
 // Set up all routes in the app
 FlowRouter.route('/', {
@@ -56,5 +57,13 @@ FlowRouter.route('/planning/:year/:group/:member', {
     name: 'planning',
     action() {
         BlazeLayout.render('App_body', { main: 'planning' })
+    },
+})
+
+FlowRouter.route('/visitnote/:visitid/:mode', {
+    // 訪問ノート
+    name: 'visitnote',
+    action() {
+        BlazeLayout.render('App_body', { main: 'visitnote' })
     },
 })
