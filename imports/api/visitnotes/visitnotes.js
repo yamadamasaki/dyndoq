@@ -40,7 +40,6 @@ Schema.VisitnotesOfferingsSchema = new SimpleSchema({
 Schema.VisitnotesAttendersSchema = new SimpleSchema({
     name: { // 氏名
         type: String,
-        optional: true,
     },
     role: { // キーパーソン, インフルエンサー, その他
         type: String,
@@ -53,19 +52,10 @@ Schema.VisitnotesAttendersSchema = new SimpleSchema({
 })
 
 Schema.VisitnotesGoalsSchema = new SimpleSchema({
-    'goal#': { // Goal#
-        type: SimpleSchema.Integer,
-        optional: true,
-    },
-    goal: { // Goal 文言
+    goal: { // ゴール#1 ~ #16+その内容 or クレーム, 宿題, ... (要対応項目)
         type: String,
-        optional: true,
     },
-    'method#': { // 方法#
-        type: SimpleSchema.Integer,
-        optional: true,
-    },
-    method: { // 方法 文言
+    method: { // 方法#1 ~ #16+その内容 or 自由 or なし
         type: String,
         optional: true,
     },
@@ -128,11 +118,11 @@ Schema.VisitnotesSchema = new SimpleSchema({
         type: [Schema.VisitnotesGoalsSchema],
         optional: true,
     },
-    memo: { // メモ
+    todo: { // メモや 課題, クレームなど次のゴールになるもの
         type: String,
         optional: true,
     },
-    information: { // 情報
+    information: { // 情報, 共有が必要なもの
         type: String,
         optional: true,
     },

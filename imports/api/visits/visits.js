@@ -72,6 +72,22 @@ const VisitSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
+    startToPlan: { // 計画着手
+        type: Date,
+        optional: true,
+    },
+    finishToPlan: { // 計画完了 -> 通知, レビュー要請
+        type: Date,
+        optional: true,
+    },
+    startToReport: { // 報告着手
+        type: Date,
+        optional: true,
+    },
+    finishToReport: { // 報告完了 -> 通知, レビュー要請
+        type: Date,
+        optional: true,
+    },
 })
 
 Visits.attachSchema(VisitSchema)
