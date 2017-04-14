@@ -51,11 +51,23 @@
                                     </div>
                                 </form>
                             </td>
-                            <td>{{offering.quantity}}</td>
+                            <td>
+                                <form class="cell integer" id="quantity">
+                                    <div class="form-group">
+                                        <input type="number" name="value" placeholder="数量" class="form-control" id="quantity-{{note._id}}-{{offering.product}}" value="{{offering.quantity}}">
+                                    </div>
+                                </form>
+                            </td>
                             <td>{{sales offering.unitPrice offering.quantity}}</td>
-                            <td>{{offering.cost}}</td>
+                            <td>
+                                <form class="cell integer" id="cost">
+                                    <div class="form-group">
+                                        <input type="number" name="value" placeholder="単位原価" class="form-control" id="cost-{{note._id}}-{{offering.product}}" value="{{offering.cost}}">
+                                    </div>
+                                </form>
+                            </td>
                             <td>{{grossMargin offering.unitPrice offering.quantity offering.cost}}</td>
-                            <td>{{grossMarginRate offering.unitPrice offering.quantity offering.cost}}</td>
+                            <td>{{grossMarginRate offering.unitPrice offering.cost}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -64,10 +76,10 @@
                             <td>計</td>
                             <td>-</td>
                             <td>-</td>
-                            <td>{{sumOfSales}}</td>
+                            <td>{{sumOfSales note.preOfferings}}</td>
                             <td>-</td>
-                            <td>{{sumOfGrossMargin}}</td>
-                            <td>{{totalGrossMarginRate}}</td>
+                            <td>{{sumOfGrossMargin note.preOfferings}}</td>
+                            <td>{{totalGrossMarginRate note.preOfferings}}</td>
                         </tr>
                     </tfoot>
                 </table>

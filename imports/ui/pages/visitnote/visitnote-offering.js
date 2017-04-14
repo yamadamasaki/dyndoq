@@ -19,10 +19,13 @@ Template.visitnoteOffering.onCreated(() => {
     })
 })
 
+const _sumOfSales = offerings => offerings.reduce((acc, val) => acc + val.unitPrice * val.quantity, 0)
+const _sumOfGrossMargin = offerings => offerings.reduce((acc, val) => acc + (val.unitPrice - val.cost) * val.quantity, 0)
+
 Template.visitnoteOffering.helpers({
     sales: (unitPrice, quantity) => unitPrice * quantity,
     grossMargin: (unitPrice, quantity, cost) => (unitPrice - cost) * quantity,
-    grossMarginRate: (unitPrice, quantity, cost) => 100 - (cost / unitPrice) * quantity * 100,
+    grossMarginRate: (unitPrice, cost) => (unitPrice - cost) / unitPrice * 100,
     products: noteId => {
         const note = Visitnotes.findOne(noteId) || {}
         const visit = Visits.findOne(note.visit) || {}
@@ -30,6 +33,9 @@ Template.visitnoteOffering.helpers({
         return products
     },
     nameOfProduct: productId => (Products.findOne(productId) || {}).name,
+    sumOfSales: offerings => offerings ? _sumOfSales(offerings) : 0,
+    sumOfGrossMargin: offerings => offerings ? _sumOfGrossMargin(offerings) : 0,
+    totalGrossMarginRate: offerings => offerings ? _sumOfGrossMargin(offerings) / _sumOfSales(offerings) * 100 : 0,
 })
 
 Template.visitnoteOffering.events({
