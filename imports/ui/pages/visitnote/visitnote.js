@@ -10,6 +10,8 @@ import { moment } from 'meteor/momentjs:moment'
 
 import './visitnote.html'
 
+import './visitnote-offering.js'
+
 let id, mode
 
 Template.visitnote.onCreated(() => {
