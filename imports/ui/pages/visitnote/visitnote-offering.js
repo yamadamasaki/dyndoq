@@ -4,7 +4,7 @@ import { Visitnotes } from '/imports/api/visitnotes/visitnotes.js'
 import { Products } from '/imports/api/products/products.js'
 import { Tracker } from 'meteor/tracker'
 import { Meteor } from 'meteor/meteor'
-import { addOffering } from '/imports/api/visitnotes/methods.js'
+import { addOffering, updateOffering } from '/imports/api/visitnotes/methods.js'
 
 import './visitnote-offering.html'
 
@@ -40,10 +40,22 @@ Template.visitnoteOffering.events({
         const [x, y, noteId] = event.target.id.split('-')
         const note = Visitnotes.findOne(noteId)
         if (!note) return
-        addOffering.call({ mode: 'pre', note: noteId, product: productId }), (error) => {
+        addOffering.call({ mode: 'pre', note: noteId, product: productId }, (error) => {
             if (error) {
                 console.log('addOffering.call', error)
             }
-        }
+        })
+    },
+    'change .cell': event => {
+        event.preventDefault()
+
+        const value = parseInt(event.target.value)
+        const [field, noteId, productId] = event.target.id.split('-')
+        const mode = 'pre'
+        updateOffering.call({ noteId, productId, field, value, mode }, (error) => {
+            if (error) {
+                console.log('updateOffering.call', error)
+            }
+        })
     },
 })

@@ -44,7 +44,13 @@
                         {{#each offering in note.preOfferings}}
                         <tr>
                             <td>{{nameOfProduct offering.product}}</td>
-                            <td>{{offering.unitPrice}}</td>
+                            <td>
+                                <form class="cell integer" id="unitPrice">
+                                    <div class="form-group">
+                                        <input type="number" name="value" placeholder="単価金額" class="form-control" id="unitPrice-{{note._id}}-{{offering.product}}" value="{{offering.unitPrice}}">
+                                    </div>
+                                </form>
+                            </td>
                             <td>{{offering.quantity}}</td>
                             <td>{{sales offering.unitPrice offering.quantity}}</td>
                             <td>{{offering.cost}}</td>
@@ -59,6 +65,7 @@
                             <td>-</td>
                             <td>-</td>
                             <td>{{sumOfSales}}</td>
+                            <td>-</td>
                             <td>{{sumOfGrossMargin}}</td>
                             <td>{{totalGrossMarginRate}}</td>
                         </tr>
