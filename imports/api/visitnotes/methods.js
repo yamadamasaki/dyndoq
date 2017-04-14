@@ -20,3 +20,20 @@ export const insertVisitnote = new ValidatedMethod({
         })
     },
 })
+
+export const addOffering = new ValidatedMethod({
+    name: 'visitnote.addOffering',
+    validate: new SimpleSchema({
+        note: { type: String },
+        mode: { type: String },
+        product: { type: String },
+    }).validator(),
+    run: ({ note, mode, product }) => {
+        const offering = mode === 'pre' ? 'preOfferings' : 'postOfferings'
+        return Visitnotes.update(note, {
+            $push: {
+                [offering]: { product }
+            }
+        })
+    },
+})

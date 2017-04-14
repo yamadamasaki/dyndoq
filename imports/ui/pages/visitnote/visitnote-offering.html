@@ -6,7 +6,7 @@
                 <li>今度の訪問に提案する商品を追加しますか?</li>
                 <ul>
                     <li>
-                        <form class="add-offering form-inline">
+                        <form class="add-offering form-inline" id="add-offering-{{note._id}}">
                             <div class="form-group">
                                 <label for="add-product">商品</label>
                                 <select class="form-control" id="add-product}">
@@ -17,7 +17,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-default">を追加</button> する!
+                                <label for="addOfferingButton">を</label>
+                                <button type="submit" name="submit" class="btn btn-default" id="addOfferingButton">追加</button> する!
                             </div>
                         </form>
                     </li>
@@ -42,7 +43,7 @@
                     <tbody>
                         {{#each offering in note.preOfferings}}
                         <tr>
-                            <td>{{offering.product}}</td>
+                            <td>{{nameOfProduct offering.product}}</td>
                             <td>{{offering.unitPrice}}</td>
                             <td>{{offering.quantity}}</td>
                             <td>{{sales offering.unitPrice offering.quantity}}</td>
