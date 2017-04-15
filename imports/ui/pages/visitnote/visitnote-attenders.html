@@ -38,7 +38,7 @@
                 <td>
                     <form class="cell string" id="attenderRole">
                         <div class="form-group">
-                            <select class="form-control" id="attender-role-{{note._id}}-{{attender.name}}" value={{attender.role}}>
+                            <select class="form-control" id="attender-role-{{note._id}}-{{attender.name}}">
                                 <option></option>
                                 <option {{equals 'キーパーソン' attender.role 'selected' ''}}>キーパーソン</option>
                                 <option {{equals 'インフルエンサー' attender.role 'selected' ''}}>インフルエンサー</option>
@@ -47,8 +47,20 @@
                         </div>
                     </form>
                 </td>
-                <td>{{attender.interest}}</td>
-                <td>{{attender.memo}}</td>
+                <td>
+                    <form class="cell integer" id="attenderInterest">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="attender-interest-{{note._id}}-{{attender.name}}" value={{attender.interest}} min="-2" max="2">
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form class="cell string" id="attenderMemo">
+                        <div class="form-group">
+                            <textarea class="form-control" id="attender-memo-{{note._id}}-{{attender.name}}" value={{attender.memo}} placeholder="メモ" form="attenderMemo"></textarea>
+                        </div>
+                    </form>
+                </td>
             </tr>
             {{/each}}
         </tbody>

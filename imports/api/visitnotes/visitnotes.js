@@ -47,7 +47,7 @@ Schema.VisitnotesAttendersSchema = new SimpleSchema({
     },
     interest: { // 関心度, -2 ~ +2
         type: SimpleSchema.Integer,
-        optional: true,
+        defaultValue: 0,
     },
     memo: { // メモ
         type: String,
