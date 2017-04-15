@@ -1,7 +1,19 @@
 import { Template } from 'meteor/templating'
 import { addAttender, updateAttender } from '/imports/api/visitnotes/methods.js'
+import { Visitnotes } from '/imports/api/visitnotes/visitnotes.js'
+import { Meteor } from 'meteor/meteor'
+import { Tracker } from 'meteor/tracker'
 
 import './visitnote-attenders.html'
+
+Template.visitnoteAttenders.onCreated(() => {
+    Tracker.autorun(() => {
+        const u = Meteor.user()
+        if (u) {
+            Meteor.subscribe('visitnotes.all', u.tenant)
+        }
+    })
+})
 
 Template.visitnoteAttenders.events({
     'submit .add-attender': event => {
@@ -9,6 +21,8 @@ Template.visitnoteAttenders.events({
 
         const name = event.target[0].value
         const [x, y, noteId] = event.target.id.split('-')
+        const note = Visitnotes.findOne(noteId)
+        if (note.preAttenders.filter(it => it.name === name)) return
         addAttender.call({ mode: 'pre', note: noteId, name }, (error) => {
             if (error) {
                 console.log('addAttender.call', error)
