@@ -28,14 +28,27 @@
                 <th>氏名</th>
                 <th>立場</th>
                 <th>関心度</th>
+                <th>メモ</th>
             </tr>
         </thead>
         <tbody>
             {{#each attender in note.preAttenders}}
             <tr>
                 <th>{{attender.name}}</th>
-                <td>{{attender.role}}</td>
+                <td>
+                    <form class="cell string" id="attenderRole">
+                        <div class="form-group">
+                            <select class="form-control" id="attender-role-{{note._id}}-{{attender.name}}" value={{attender.role}}>
+                                <option></option>
+                                <option {{equals 'キーパーソン' attender.role 'selected' ''}}>キーパーソン</option>
+                                <option {{equals 'インフルエンサー' attender.role 'selected' ''}}>インフルエンサー</option>
+                                <option {{equals 'その他' attender.role 'selected' ''}}>その他</option>
+                            </select>
+                        </div>
+                    </form>
+                </td>
                 <td>{{attender.interest}}</td>
+                <td>{{attender.memo}}</td>
             </tr>
             {{/each}}
         </tbody>

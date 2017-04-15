@@ -49,6 +49,10 @@ Schema.VisitnotesAttendersSchema = new SimpleSchema({
         type: SimpleSchema.Integer,
         optional: true,
     },
+    memo: { // メモ
+        type: String,
+        optional: true,
+    },
 })
 
 Schema.VisitnotesGoalsSchema = new SimpleSchema({

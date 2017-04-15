@@ -2,6 +2,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Visitnotes } from './visitnotes.js'
 import { Meteor } from 'meteor/meteor'
+import { check, Match } from 'meteor/check'
 
 export const insertVisitnote = new ValidatedMethod({
     name: 'visitnote.insert',
@@ -69,6 +70,27 @@ export const addAttender = new ValidatedMethod({
         return Visitnotes.update(note, {
             $push: {
                 [attenders]: { name }
+            }
+        })
+    },
+})
+
+export const updateAttender = new ValidatedMethod({
+    name: 'visitnote.updateAttender',
+    validate: args => {
+        check(args, {
+            name: String,
+            field: String,
+            value: Match.Any,
+            mode: String,
+            noteId: String,
+        })
+    },
+    run: ({ noteId, name, field, value, mode }) => {
+        const attenders = mode === 'pre' ? 'preAttenders' : 'postAttenders'
+        return Visitnotes.update({ _id: noteId, [`${attenders}.name`]: name }, {
+            $set: {
+                [attenders + '.$.' + field]: value
             }
         })
     },
