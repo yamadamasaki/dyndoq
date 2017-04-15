@@ -44,8 +44,6 @@ Template.visitnoteOffering.events({
 
         const productId = event.target[0].value
         const [x, y, noteId] = event.target.id.split('-')
-        const note = Visitnotes.findOne(noteId)
-        if (!note) return
         addOffering.call({ mode: 'pre', note: noteId, product: productId }, (error) => {
             if (error) {
                 console.log('addOffering.call', error)

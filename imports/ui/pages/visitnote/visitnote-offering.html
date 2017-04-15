@@ -9,7 +9,7 @@
                         <form class="add-offering form-inline" id="add-offering-{{note._id}}">
                             <div class="form-group">
                                 <label for="add-product">商品</label>
-                                <select class="form-control" id="add-product}">
+                                <select class="form-control" id="add-product">
                                     <option></option>
                                     {{#each product in (products note._id)}}
                                     <option value="{{product._id}}">{{product.name}}</option>
@@ -43,7 +43,7 @@
                     <tbody>
                         {{#each offering in note.preOfferings}}
                         <tr>
-                            <td>{{nameOfProduct offering.product}}</td>
+                            <th>{{nameOfProduct offering.product}}</th>
                             <td>
                                 <form class="cell integer" id="unitPrice">
                                     <div class="form-group">
@@ -73,7 +73,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>計</td>
+                            <th>計</th>
                             <td>-</td>
                             <td>-</td>
                             <td>{{sumOfSales note.preOfferings}}</td>
