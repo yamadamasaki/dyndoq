@@ -51,7 +51,25 @@ export const updateOffering = new ValidatedMethod({
         const offerings = mode === 'pre' ? 'preOfferings' : 'postOfferings'
         return Visitnotes.update({ _id: noteId, [`${offerings}.product`]: productId }, {
             $set: {
-                [offerings + '.$.' + field]: value }
+                [offerings + '.$.' + field]: value
+            }
+        })
+    },
+})
+
+export const addAttender = new ValidatedMethod({
+    name: 'visitnote.addAttender',
+    validate: new SimpleSchema({
+        note: { type: String },
+        mode: { type: String },
+        name: { type: String },
+    }).validator(),
+    run: ({ note, mode, name }) => {
+        const attenders = mode === 'pre' ? 'preAttenders' : 'postAttenders'
+        return Visitnotes.update(note, {
+            $push: {
+                [attenders]: { name }
+            }
         })
     },
 })

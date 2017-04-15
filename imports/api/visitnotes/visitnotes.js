@@ -114,19 +114,23 @@ Schema.VisitnotesSchema = new SimpleSchema({
         type: [Schema.VisitnotesOfferingsSchema],
         optional: true,
     },
-    goals: { // ゴール
+    goals: { // pre/post, ゴール
         type: [Schema.VisitnotesGoalsSchema],
         optional: true,
     },
-    todo: { // メモや 課題, クレームなど次のゴールになるもの
+    todo: { // post, メモや 課題, クレームなど次のゴールになるもの
         type: String,
         optional: true,
     },
-    information: { // 情報, 共有が必要なもの
+    information: { // post, 情報, 共有が必要なもの
         type: String,
         optional: true,
     },
-    attenders: { // 面談者
+    preAttenders: { // 面談者
+        type: [Schema.VisitnotesAttendersSchema],
+        optional: true,
+    },
+    postAttenders: { // 面談者
         type: [Schema.VisitnotesAttendersSchema],
         optional: true,
     },

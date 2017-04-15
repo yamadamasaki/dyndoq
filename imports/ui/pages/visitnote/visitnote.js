@@ -11,6 +11,7 @@ import { moment } from 'meteor/momentjs:moment'
 import './visitnote.html'
 
 import './visitnote-offering.js'
+import './visitnote-attenders.js'
 
 let id, mode
 
