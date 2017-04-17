@@ -1,14 +1,13 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Mongo } from 'meteor/mongo'
 
-export const SaleStepsDef = new Mongo.Collection('salesstepsdef')
+export const SalesStepsDefs = new Mongo.Collection('salesstepsdefs')
 
 let Schema = {}
 
 Schema.SalesStepDefSchema = new SimpleSchema({
     name: {
         type: String,
-        optional: true,
     },
     description: {
         type: String,
@@ -46,7 +45,7 @@ Schema.SalesStepDefSchema = new SimpleSchema({
     },
 })
 
-const SaleStepsDefSchema = new SimpleSchema({
+const SalesStepsDefSchema = new SimpleSchema({
     _id: {
         type: String,
         optional: true,
@@ -85,4 +84,4 @@ const SaleStepsDefSchema = new SimpleSchema({
     }
 })
 
-SaleStepsDef.attachSchema(SaleStepsDefSchema)
+SalesStepsDefs.attachSchema(SalesStepsDefSchema)
