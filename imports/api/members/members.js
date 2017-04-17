@@ -85,6 +85,10 @@ const MemberSchema = new SimpleSchema({
         type: [String], // DepartmentId
         optional: true,
     },
+    salesStepsDef: {
+        type: String, // SalesStepsDef._id
+        optional: true,
+    },
 })
 
 Members.attachSchema(MemberSchema)

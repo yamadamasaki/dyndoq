@@ -97,7 +97,7 @@ const registerProducts = (products) => {
     products.forEach(item => { if (!Products.findOne(_.omit(item, '_timestamp'))) Products.insert(item) })
 }
 
-const salesStepsDef = _.extend(_.clone(context), {
+const salesStepsDefExample = _.extend(_.clone(context), {
     name: 'Default Sales Steps Definition',
     steps: [{
             name: 'アプローチ',
@@ -274,8 +274,7 @@ const salesStepsDef = _.extend(_.clone(context), {
 
 const registerSalesStepsDef = def => {
     if (!def) return
-    if (!SalesStepsDefs.findOne({ name: def.name }))
-        SalesStepsDefs.insert(def)
+    if (!SalesStepsDefs.findOne({ name: def.name })) SalesStepsDefs.insert(def)
 }
 
 const memberContext = _.extend(_.clone(context), {
@@ -305,10 +304,13 @@ const departmentId = (customerName, departmentName) => {
 const inChargeOf = (customers) => customers ?
     customers.map(c => departmentId(c[0], c[1])) : []
 
+const salesStepsDef = () => SalesStepsDefs.findOne({ name: 'Default Sales Steps Definition' })._id
+
 const memberTemplate = (context, spec) => {
     return _.extend(_.clone(context), {
         account: accountId(spec.email),
         inChargeOf: inChargeOf(spec.inChargeOf),
+        salesStepsDef,
     })
 }
 
@@ -364,7 +366,7 @@ export default () => {
             ],
         },
     ]))
-    registerSalesStepsDef(salesStepsDef)
+    registerSalesStepsDef(salesStepsDefExample)
     indexVisits()
     indexSmaps()
 }
