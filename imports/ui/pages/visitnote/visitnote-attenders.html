@@ -21,48 +21,52 @@
                 </ul>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>氏名</th>
+                            <th>立場</th>
+                            <th>関心度</th>
+                            <th>メモ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each attender in note.preAttenders}}
+                        <tr>
+                            <th>{{attender.name}}</th>
+                            <td>
+                                <form class="cell string" id="attenderRole">
+                                    <div class="form-group">
+                                        <select class="form-control" id="attender-role-{{note._id}}-{{attender.name}}">
+                                            <option></option>
+                                            <option {{equals 'キーパーソン' attender.role 'selected' ''}}>キーパーソン</option>
+                                            <option {{equals 'インフルエンサー' attender.role 'selected' ''}}>インフルエンサー</option>
+                                            <option {{equals 'その他' attender.role 'selected' ''}}>その他</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="cell integer" id="attenderInterest">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="attender-interest-{{note._id}}-{{attender.name}}" value={{attender.interest}} min="-2" max="2">
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="cell string" id="attenderMemo">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="attender-memo-{{note._id}}-{{attender.name}}" value={{attender.memo}} placeholder="メモ" form="attenderMemo"></textarea>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>氏名</th>
-                <th>立場</th>
-                <th>関心度</th>
-                <th>メモ</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each attender in note.preAttenders}}
-            <tr>
-                <th>{{attender.name}}</th>
-                <td>
-                    <form class="cell string" id="attenderRole">
-                        <div class="form-group">
-                            <select class="form-control" id="attender-role-{{note._id}}-{{attender.name}}">
-                                <option></option>
-                                <option {{equals 'キーパーソン' attender.role 'selected' ''}}>キーパーソン</option>
-                                <option {{equals 'インフルエンサー' attender.role 'selected' ''}}>インフルエンサー</option>
-                                <option {{equals 'その他' attender.role 'selected' ''}}>その他</option>
-                            </select>
-                        </div>
-                    </form>
-                </td>
-                <td>
-                    <form class="cell integer" id="attenderInterest">
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="attender-interest-{{note._id}}-{{attender.name}}" value={{attender.interest}} min="-2" max="2">
-                        </div>
-                    </form>
-                </td>
-                <td>
-                    <form class="cell string" id="attenderMemo">
-                        <div class="form-group">
-                            <textarea class="form-control" id="attender-memo-{{note._id}}-{{attender.name}}" value={{attender.memo}} placeholder="メモ" form="attenderMemo"></textarea>
-                        </div>
-                    </form>
-                </td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
 </template>
