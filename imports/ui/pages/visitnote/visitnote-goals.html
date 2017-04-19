@@ -2,8 +2,89 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                visitnoteGoals
+                <h5>ゴール</h5>
+                <blockquote>
+                    <p>まずは今回の訪問で達成しようと思うゴールを決めます. 以下はこの訪問のステップで達成可能なゴールです. この中から, 今回の訪問で達成すべきゴールを選択して下さい.</p>
+                </blockquote>
             </div>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                達成する
+                            </th>
+                            <th>
+                                ゴール名
+                            </th>
+                            <th>
+                                ゴール
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each goal in (goals stepdef.steps note.visit)}}
+                        <tr>
+                            <td>
+                                <input class="cell" type="checkbox" name="todo" id="goalUse-{{note._id}}-{{goal.name}}" {{isChecked note goal.name 'isSelected' 'goals'}}>
+                            </td>
+                            <td>
+                                <p>{{goal.name}}</p>
+                            </td>
+                            <td>
+                                <p>{{goal.content}}</p>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>方法, やること, やったこと</h5>
+                <blockquote>
+                    <p>ゴールを達成するための方法を決めます. 次にその方法を用いて, ゴールを達成するために具体的に何をするかを考えてください.</p>
+                </blockquote>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            使う
+                        </th>
+                        <th>
+                            方法名
+                        </th>
+                        <th>
+                            方法
+                        </th>
+                        <th>
+                            すること
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each method in (methods stepdef.steps note.visit)}}
+                    <tr>
+                        <td>
+                            <input class="cell" type="checkbox" name="todo" id="methodUse-{{note._id}}-{{method.name}}" {{isChecked note method.name 'isSelected' 'methods'}}>
+                        </td>
+                        <td>
+                            <p>{{method.name}}</p>
+                        </td>
+                        <td>
+                            <p>{{method.content}}</p>
+                        </td>
+                        <td>
+                            <textarea class="cell" id="methodTodo-{{note._id}}-{{method.name}}">{{text note method.name 'todo' 'methods'}}</textarea>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 </template>

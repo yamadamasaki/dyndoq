@@ -6,6 +6,8 @@ import { Visits } from '/imports/api/visits/visits.js'
 import { Customers } from '/imports/api/customers/customers.js'
 import { Departments } from '/imports/api/customers/departments.js'
 import { Visitnotes } from '/imports/api/visitnotes/visitnotes.js'
+import { Members } from '/imports/api/members/members.js'
+import { SalesStepsDefs } from '/imports/api/definitions/sales-steps-defs.js'
 import { moment } from 'meteor/momentjs:moment'
 
 import './visitnote.html'
@@ -26,6 +28,8 @@ Template.visitnote.onCreated(() => {
             Meteor.subscribe('departments.all', u.tenant)
             Meteor.subscribe('visits.all', u.tenant)
             Meteor.subscribe('visitnotes.all', u.tenant)
+            Meteor.subscribe('members.all', u.tenant)
+            Meteor.subscribe('salesstepsdefs.all', u.tenant)
         }
     })
 })
@@ -47,4 +51,10 @@ Template.visitnote.helpers({
     },
     pre: () => mode === 'pre' || mode === 'prepost',
     post: () => mode === 'post' || mode === 'prepost',
+    stepdef: () => {
+        const n = Visitnotes.findOne(id) || {}
+        const v = Visits.findOne(n.visit) || {}
+        const m = Members.findOne(v.member) || {}
+        return SalesStepsDefs.findOne(m.salesStepsDef) || {}
+    }
 })
