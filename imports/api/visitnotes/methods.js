@@ -95,3 +95,38 @@ export const updateAttender = new ValidatedMethod({
         })
     },
 })
+
+export const updateGoal = new ValidatedMethod({
+    name: 'visitnote.updateGoal',
+    validate: args => {
+        check(args, {
+            note: String, // note._id
+            list: String, // goals/methods/homeworks/complaints
+            field: String, // todo/did/isAchieved
+            name: String, // name
+            value: Match.OneOf(String, Boolean), // value
+        })
+    },
+    run: ({ note, list, field, name, value }) => {
+        const n = Visitnotes.findOne(note)
+        if (!n) return
+        if (!n[list] || !n[list].find(it => it.name === name)) {
+            Visitnotes.update({
+                _id: note,
+            }, {
+                $push: {
+                    [list]: { name, [field]: value }
+                }
+            })
+        } else {
+            Visitnotes.update({
+                _id: note,
+                [`${list}.name`]: name
+            }, {
+                $set: {
+                    [list + '.$.' + field]: value
+                }
+            })
+        }
+    },
+})

@@ -5,7 +5,7 @@ export const Visitnotes = new Mongo.Collection('visitnotes')
 
 let Schema = {}
 
-Schema.VisitnotesOfferingsSchema = new SimpleSchema({
+Schema.VisitnoteOfferingSchema = new SimpleSchema({
     product: {
         type: String, // Products._id
     },
@@ -37,7 +37,7 @@ Schema.VisitnotesOfferingsSchema = new SimpleSchema({
     // 売上, 粗利, 粗利率は上記から算出
 })
 
-Schema.VisitnotesAttendersSchema = new SimpleSchema({
+Schema.VisitnoteAttenderSchema = new SimpleSchema({
     name: { // 氏名
         type: String,
     },
@@ -56,29 +56,34 @@ Schema.VisitnotesAttendersSchema = new SimpleSchema({
     },
 })
 
-Schema.VisitnotesGoalsSchema = new SimpleSchema({
-    goal: { // ゴール#1 ~ #16+その内容 or クレーム, 宿題, ... (要対応項目)
-        type: String,
-    },
-    method: { // 方法#1 ~ #16+その内容 or 自由 or なし
+Schema.VisitnoteItemSchema = new SimpleSchema({
+    kind: { // goal, method, homework, complaints, 
         type: String,
         optional: true,
     },
-    todo: { // やること
+    isSelected: {
+        type: Boolean,
+        optional: true,
+    },
+    name: {
         type: String,
         optional: true,
     },
-    did: { // やったこと
+    todo: {
         type: String,
         optional: true,
     },
-    isAchieved: { // 達成
+    did: {
+        type: String,
+        optional: true,
+    },
+    isAchieved: {
         type: Boolean,
         optional: true,
     },
 })
 
-Schema.VisitnotesSchema = new SimpleSchema({
+Schema.VisitnoteSchema = new SimpleSchema({
     _id: {
         type: String,
         optional: true,
@@ -112,19 +117,27 @@ Schema.VisitnotesSchema = new SimpleSchema({
         type: String, // Visits._id
     },
     preOfferings: { // 予習 商材
-        type: [Schema.VisitnotesOfferingsSchema],
+        type: [Schema.VisitnoteOfferingSchema],
         optional: true,
     },
     postOfferings: { // 復習 商材
-        type: [Schema.VisitnotesOfferingsSchema],
+        type: [Schema.VisitnoteOfferingSchema],
         optional: true,
     },
     goals: { // pre/post, ゴール
-        type: [Schema.VisitnotesGoalsSchema],
+        type: [Schema.VisitnoteItemSchema],
         optional: true,
     },
-    todo: { // post, メモや 課題, クレームなど次のゴールになるもの
-        type: String,
+    methods: { // 方法論
+        type: [Schema.VisitnoteItemSchema],
+        optional: true,
+    },
+    homeworks: { // 宿題
+        type: [Schema.VisitnoteItemSchema],
+        optional: true,
+    },
+    complaints: { // クレーム処理
+        type: [Schema.VisitnoteItemSchema],
         optional: true,
     },
     information: { // post, 情報, 共有が必要なもの
@@ -132,13 +145,13 @@ Schema.VisitnotesSchema = new SimpleSchema({
         optional: true,
     },
     preAttenders: { // 面談者
-        type: [Schema.VisitnotesAttendersSchema],
+        type: [Schema.VisitnoteAttenderSchema],
         optional: true,
     },
     postAttenders: { // 面談者
-        type: [Schema.VisitnotesAttendersSchema],
+        type: [Schema.VisitnoteAttenderSchema],
         optional: true,
     },
 })
 
-Visitnotes.attachSchema(Schema.VisitnotesSchema)
+Visitnotes.attachSchema(Schema.VisitnoteSchema)
