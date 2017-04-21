@@ -11,6 +11,7 @@ import { SmapColors } from '/imports/api/smaps/smap-colors.js'
 import { SmapsDetail } from '/imports/api/smaps/smaps-detail.js'
 import { SalesStepsDefs } from '/imports/api/definitions/sales-steps-defs.js'
 import { _ } from 'meteor/underscore'
+import bcrypt from 'bcrypt'
 
 const accounts = [{
         options: {
@@ -21,6 +22,7 @@ const accounts = [{
         roles: ['admin'],
         group: '第一営業部',
         tenant: 'tenant-acme',
+        rocketchat: { username: 'kawakami-tetsuya', password: bcrypt.hashSync('kawakami', bcrypt.genSaltSync()) },
     },
     {
         options: {
@@ -31,6 +33,7 @@ const accounts = [{
         roles: ['member', 'admin'],
         group: '第一営業部',
         tenant: 'tenant-acme',
+        rocketchat: { username: 'nagashima-shigeo', password: bcrypt.hashSync('nagashima', bcrypt.genSaltSync()) },
     },
     {
         options: {
@@ -41,6 +44,7 @@ const accounts = [{
         roles: ['member'],
         group: '第一営業部',
         tenant: 'tenant-acme',
+        rocketchat: { username: 'oh-sadaharu', password: bcrypt.hashSync('oh', bcrypt.genSaltSync()) },
     }
 ]
 
@@ -51,6 +55,7 @@ const registerAccounts = (accounts) => {
             if (id) {
                 Roles.addUsersToRoles(id, item.roles, item.group)
                 Meteor.users.update(id, { $set: { tenant: item.tenant } })
+                if (item.rocketchat) Meteor.users.update(id, { $set: { 'services.chat': item.rocketchat } })
             }
         }
     })
