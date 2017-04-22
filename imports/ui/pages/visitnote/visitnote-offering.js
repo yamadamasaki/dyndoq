@@ -43,7 +43,7 @@ Template.visitnoteOffering.events({
         event.preventDefault()
 
         const productId = event.target[0].value
-        const [x, y, noteId] = event.target.id.split('-')
+        const [, , noteId] = event.target.id.split('-')
         const note = Visitnotes.findOne(noteId)
         if (note.preOfferings.filter(it => it.product === productId)) return
         addOffering.call({ mode: 'pre', note: noteId, product: productId }, (error) => {

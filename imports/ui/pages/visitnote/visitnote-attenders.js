@@ -20,7 +20,7 @@ Template.visitnoteAttenders.events({
         event.preventDefault()
 
         const name = event.target[0].value
-        const [x, y, noteId] = event.target.id.split('-')
+        const [, , noteId] = event.target.id.split('-')
         const note = Visitnotes.findOne(noteId)
         if (note.preAttenders.filter(it => it.name === name)) return
         addAttender.call({ mode: 'pre', note: noteId, name }, (error) => {
@@ -32,9 +32,9 @@ Template.visitnoteAttenders.events({
     'change .cell': event => {
         event.preventDefault()
 
-        const [cell, type] = event.currentTarget.className.split(' ')
+        const [, type] = event.currentTarget.className.split(' ')
         const value = type === 'integer' ? parseInt(event.target.value) : event.target.value
-        const [attender, field, noteId, name] = event.target.id.split('-')
+        const [, field, noteId, name] = event.target.id.split('-')
         const mode = 'pre'
         updateAttender.call({ noteId, name, field, value, mode }, (error) => {
             if (error) {
