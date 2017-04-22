@@ -16,13 +16,14 @@ Template.visitnoteGoals.onCreated(() => {
 })
 
 const visitOf = (steps, visit) => {
+    if (!steps) return
     const v = Visits.findOne(visit)
     return v ? steps.find(it => it.name === v.step) : {}
 }
 
 Template.visitnoteGoals.helpers({
-    goals: (def, note) => visitOf(def, note).goals,
-    methods: (def, note) => visitOf(def, note).methods,
+    goals: (def, note) => (visitOf(def, note) || {}).goals,
+    methods: (def, note) => (visitOf(def, note) || {}).methods,
     isChecked: (note, name, field, type) => {
         const t = note[type]
         if (!t) return ''
