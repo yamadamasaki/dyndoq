@@ -27,7 +27,8 @@ module.exports = {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
       ROOT_URL: 'http://54.236.27.246/',
-      MONGO_URL: 'mongodb://localhost/meteor',
+      //MONGO_URL: 'mongodb://localhost/meteor',
+      MONGO_URL: "mongodb://yamadamasaki:DkZ968dnYRBc9y95@cluster0-shard-00-00-hb9rw.mongodb.net:27017,cluster0-shard-00-01-hb9rw.mongodb.net:27017,cluster0-shard-00-02-hb9rw.mongodb.net:27017/documents?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
     },
 
     docker: {
