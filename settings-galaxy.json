@@ -1,0 +1,12 @@
+{
+    "chat_type": "rocket.chat",
+    "chat_url": "http://162.243.224.227:3000",
+    "galaxy.meteor.com": {
+        "env": {
+            "MONGO_URL": "mongodb://yamadamasaki:DkZ968dnYRBc9y95@cluster0-shard-00-00-hb9rw.mongodb.net:27017,cluster0-shard-00-01-hb9rw.mongodb.net:27017,cluster0-shard-00-02-hb9rw.mongodb.net:27017/meteor?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
+            "MAIL_URL": "smtp://postmaster%40sandbox78c6e360c31842729e0748b7bea07617.mailgun.org:1bcd88f68f1c7d5092eeec6544e82323@mailgun.org:587/",
+            "MAIL_HEADER_FROM": "masaki@metabolics.co.jp",
+            "MAIL_HEADER_TO": "masaki@metabolics.co.jp"
+        }
+    }
+}
