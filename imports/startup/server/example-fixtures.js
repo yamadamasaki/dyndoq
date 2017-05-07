@@ -357,6 +357,7 @@ export default () => {
         ['福井支社', '顧客A社', '重要', ],
     ]))
     registerProducts(products(context, ['製品A', '製品B', '製品C']))
+    registerSalesStepsDef(salesStepsDefExample)
     registerMembers(members(memberContext, [
         { email: 'kawakami-tetsuya@metabolics.co.jp', customers: [] },
         {
@@ -373,7 +374,6 @@ export default () => {
             ],
         },
     ]))
-    registerSalesStepsDef(salesStepsDefExample)
     indexVisits()
     indexSmaps()
 }
