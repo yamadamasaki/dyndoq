@@ -86,8 +86,9 @@ const MemberSchema = new SimpleSchema({
         optional: true,
     },
     salesStepsDef: {
-        type: String, // SalesStepsDef._id
+        type: [Object], // was SalesStepsDef._id ...
         optional: true,
+        blackbox: true,
     },
 })
 

@@ -315,7 +315,7 @@ const memberTemplate = (context, spec) => {
     return _.extend(_.clone(context), {
         account: accountId(spec.email),
         inChargeOf: inChargeOf(spec.inChargeOf),
-        salesStepsDef,
+        salesStepsDef: salesStepsDef(),
     })
 }
 
@@ -329,7 +329,9 @@ const registerMembers = (members) => {
     Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1 })
     Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1 })
     Members.rawCollection().createIndex({ _tenant: 1, _service: 1, _group: 1, financialYear: 1, account: 1 })
-    members.forEach(item => { if (!Members.findOne(_.omit(item, '_timestamp'))) Members.insert(item) })
+    members.forEach(item => {
+        if (!Members.findOne(_.omit(item, '_timestamp'))) Members.insert(item)
+    })
 }
 
 const indexVisits = () => {
