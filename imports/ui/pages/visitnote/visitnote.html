@@ -60,6 +60,15 @@
                 {{> visitnoteReview note=note stepdef=stepdef}}
                 
             </div>
+            <div class="col-md-12">
+                <h4>コミットメント</h4>
+                <blockquote>
+                    <p>レビューを受け, 承認が取れたら, このノートをコミットしてください.</p>
+                </blockquote>
+                
+                {{> visitnoteCommitment note=note mode='pre'}}
+                
+            </div>
         </div>
         {{/if}}
         

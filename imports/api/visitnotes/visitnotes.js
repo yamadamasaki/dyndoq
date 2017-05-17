@@ -152,6 +152,16 @@ Schema.VisitnoteSchema = new SimpleSchema({
         type: [Schema.VisitnoteAttenderSchema],
         optional: true,
     },
+    preIsCommited: {
+        type: Boolean,
+        optional: true,
+        defaultValue: false,
+    },
+    postIsCommited: {
+        type: Boolean,
+        optional: true,
+        defaultValue: false,
+    },
 })
 
 Visitnotes.attachSchema(Schema.VisitnoteSchema)

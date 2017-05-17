@@ -16,6 +16,7 @@ import './visitnote-offering.js'
 import './visitnote-attenders.js'
 import './visitnote-goals.js'
 import './visitnote-review.js'
+import './visitnote-commitment.js'
 
 let id, mode
 

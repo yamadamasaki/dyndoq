@@ -130,3 +130,17 @@ export const updateGoal = new ValidatedMethod({
         }
     },
 })
+
+export const commitNote = new ValidatedMethod({
+    name: 'visitnote.commitNote',
+    validate: new SimpleSchema({
+        noteId: { type: String },
+        mode: { type: String },
+    }).validator(),
+    run: ({ noteId, mode }) => {
+        return Visitnotes.update({ _id: noteId }, {
+            $set: {
+                [mode === 'pre' ? 'preIsCommited' : 'preIsCommited']: true }
+        })
+    },
+})
